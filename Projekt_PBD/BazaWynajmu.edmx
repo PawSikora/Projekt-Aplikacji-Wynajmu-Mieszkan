@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Wynajem.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="idA" />
+          </Key>
+          <Property Name="idA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Bilans">
+          <Key>
+            <PropertyRef Name="idB" />
+          </Key>
+          <Property Name="idB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idM" Type="int" />
+          <Property Name="dataTransakcji" Type="datetime" />
+          <Property Name="kwota" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="kategoria" Type="varchar" MaxLength="255" />
+          <Property Name="notka" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DaneMieszkania">
+          <Key>
+            <PropertyRef Name="idM" />
+          </Key>
+          <Property Name="idM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idW" Type="int" />
+          <Property Name="idK" Type="int" />
+          <Property Name="Miasto" Type="nvarchar" MaxLength="255" />
+          <Property Name="kodPocztowy" Type="varchar" MaxLength="255" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="255" />
+          <Property Name="nrBudynku" Type="int" />
+          <Property Name="nrMieszkania" Type="int" />
+          <Property Name="doWynajecia" Type="bit" />
+          <Property Name="doRemontu" Type="bit" />
+          <Property Name="kosztaRemontow" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="poczatekWynajmu" Type="datetime" />
+          <Property Name="koniecWynajmu" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="idK" />
+          </Key>
+          <Property Name="idK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="nrKonta" Type="int" />
+          <Property Name="imie" Type="nvarchar" MaxLength="255" />
+          <Property Name="nazwisko" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="idL" />
+          </Key>
+          <Property Name="idL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="haslo" Type="nvarchar" MaxLength="255" />
+          <Property Name="idK" Type="int" />
+          <Property Name="idW" Type="int" />
+          <Property Name="idA" Type="int" />
+        </EntityType>
+        <EntityType Name="Oferta">
+          <Key>
+            <PropertyRef Name="idO" />
+          </Key>
+          <Property Name="idO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dataWystawienia" Type="datetime" />
+          <Property Name="idM" Type="int" />
+          <Property Name="opis" Type="nvarchar" MaxLength="255" />
+          <Property Name="cenaZaMiesiac" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="wyposazenie" Type="nvarchar" MaxLength="255" />
+          <Property Name="metraz" Type="float" />
+          <Property Name="aktualne" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Wlasciciel">
+          <Key>
+            <PropertyRef Name="idW" />
+          </Key>
+          <Property Name="idW" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="nrKonta" Type="int" />
+          <Property Name="imie" Type="nvarchar" MaxLength="255" />
+          <Property Name="nazwisko" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Bilans__idM__07C12930">
+          <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="0..1" />
+          <End Role="Bilans" Type="Self.Bilans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DaneMieszkania">
+              <PropertyRef Name="idM" />
+            </Principal>
+            <Dependent Role="Bilans">
+              <PropertyRef Name="idM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DaneMieszka__idK__09A971A2">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
+          <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="idK" />
+            </Principal>
+            <Dependent Role="DaneMieszkania">
+              <PropertyRef Name="idK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DaneMieszka__idW__08B54D69">
+          <End Role="Wlasciciel" Type="Self.Wlasciciel" Multiplicity="0..1" />
+          <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wlasciciel">
+              <PropertyRef Name="idW" />
+            </Principal>
+            <Dependent Role="DaneMieszkania">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__idA__05D8E0BE">
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="idA" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="idA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__idK__03F0984C">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="idK" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="idK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__idW__04E4BC85">
+          <End Role="Wlasciciel" Type="Self.Wlasciciel" Multiplicity="0..1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wlasciciel">
+              <PropertyRef Name="idW" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oferta__idM__06CD04F7">
+          <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="0..1" />
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DaneMieszkania">
+              <PropertyRef Name="idM" />
+            </Principal>
+            <Dependent Role="Oferta">
+              <PropertyRef Name="idM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WynajemStoreContainer">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bilans" EntityType="Self.Bilans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DaneMieszkania" EntityType="Self.DaneMieszkania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oferta" EntityType="Self.Oferta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wlasciciel" EntityType="Self.Wlasciciel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bilans__idM__07C12930" Association="Self.FK__Bilans__idM__07C12930">
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
+            <End Role="Bilans" EntitySet="Bilans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DaneMieszka__idK__09A971A2" Association="Self.FK__DaneMieszka__idK__09A971A2">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DaneMieszka__idW__08B54D69" Association="Self.FK__DaneMieszka__idW__08B54D69">
+            <End Role="Wlasciciel" EntitySet="Wlasciciel" />
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__idA__05D8E0BE" Association="Self.FK__Log__idA__05D8E0BE">
+            <End Role="Administrator" EntitySet="Administrator" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__idK__03F0984C" Association="Self.FK__Log__idK__03F0984C">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__idW__04E4BC85" Association="Self.FK__Log__idW__04E4BC85">
+            <End Role="Wlasciciel" EntitySet="Wlasciciel" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oferta__idM__06CD04F7" Association="Self.FK__Oferta__idM__06CD04F7">
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
+            <End Role="Oferta" EntitySet="Oferta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Wynajem" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="idA" />
+          </Key>
+          <Property Name="idA" Type="Int32" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Logs" Relationship="Wynajem.FK__Log__idA__71D1E811" FromRole="Administrator" ToRole="Log" />
+        </EntityType>
+        <EntityType Name="DaneMieszkania">
+          <Key>
+            <PropertyRef Name="idM" />
+          </Key>
+          <Property Name="idM" Type="Int32" Nullable="false" />
+          <Property Name="idW" Type="Int32" />
+          <Property Name="idK" Type="Int32" />
+          <Property Name="Miasto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="kodPocztowy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Ulica" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="nrBudynku" Type="Int32" />
+          <Property Name="nrMieszkania" Type="Int32" />
+          <Property Name="doWynajecia" Type="Boolean" />
+          <Property Name="doRemontu" Type="Boolean" />
+          <Property Name="kosztaRemontow" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="poczatekWynajmu" Type="DateTime" Precision="3" />
+          <Property Name="koniecWynajmu" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Klient" Relationship="Self.FK__DaneMieszka__idK__619B8048" FromRole="DaneMieszkania" ToRole="Klient" />
+          <NavigationProperty Name="Wlasciciel" Relationship="Self.FK__DaneMieszka__idW__60A75C0F" FromRole="DaneMieszkania" ToRole="Wlasciciel" />
+          <NavigationProperty Name="Bilans" Relationship="Wynajem.FK__Bilans__idM__73BA3083" FromRole="DaneMieszkania" ToRole="Bilan" />
+          <NavigationProperty Name="Ofertas" Relationship="Wynajem.FK__Oferta__idM__72C60C4A" FromRole="DaneMieszkania" ToRole="Oferta" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="idK" />
+          </Key>
+          <Property Name="idK" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nrKonta" Type="Int32" />
+          <Property Name="imie" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="nazwisko" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DaneMieszkanias" Relationship="Self.FK__DaneMieszka__idK__619B8048" FromRole="Klient" ToRole="DaneMieszkania" />
+          <NavigationProperty Name="Logs" Relationship="Wynajem.FK__Log__idK__6FE99F9F" FromRole="Klient" ToRole="Log" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Wlasciciel">
+          <Key>
+            <PropertyRef Name="idW" />
+          </Key>
+          <Property Name="idW" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nrKonta" Type="Int32" />
+          <Property Name="imie" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="nazwisko" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DaneMieszkanias" Relationship="Self.FK__DaneMieszka__idW__60A75C0F" FromRole="Wlasciciel" ToRole="DaneMieszkania" />
+          <NavigationProperty Name="Logs" Relationship="Wynajem.FK__Log__idW__70DDC3D8" FromRole="Wlasciciel" ToRole="Log" />
+        </EntityType>
+        <Association Name="FK__DaneMieszka__idK__619B8048">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
+          <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="idK" />
+            </Principal>
+            <Dependent Role="DaneMieszkania">
+              <PropertyRef Name="idK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DaneMieszka__idW__60A75C0F">
+          <End Role="Wlasciciel" Type="Self.Wlasciciel" Multiplicity="0..1" />
+          <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wlasciciel">
+              <PropertyRef Name="idW" />
+            </Principal>
+            <Dependent Role="DaneMieszkania">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Baza_wynajmuEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+          <EntitySet Name="DaneMieszkanias" EntityType="Self.DaneMieszkania" />
+          <EntitySet Name="Klients" EntityType="Self.Klient" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Wlasciciels" EntityType="Self.Wlasciciel" />
+          <AssociationSet Name="FK__DaneMieszka__idK__619B8048" Association="Self.FK__DaneMieszka__idK__619B8048">
+            <End Role="Klient" EntitySet="Klients" />
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkanias" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DaneMieszka__idW__60A75C0F" Association="Self.FK__DaneMieszka__idW__60A75C0F">
+            <End Role="Wlasciciel" EntitySet="Wlasciciels" />
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkanias" />
+          </AssociationSet>
+          <EntitySet Name="Bilans" EntityType="Wynajem.Bilan" />
+          <EntitySet Name="Logs" EntityType="Wynajem.Log" />
+          <EntitySet Name="Ofertas" EntityType="Wynajem.Oferta" />
+          <AssociationSet Name="FK__Log__idA__71D1E811" Association="Wynajem.FK__Log__idA__71D1E811">
+            <End Role="Administrator" EntitySet="Administrators" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bilans__idM__73BA3083" Association="Wynajem.FK__Bilans__idM__73BA3083">
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkanias" />
+            <End Role="Bilan" EntitySet="Bilans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oferta__idM__72C60C4A" Association="Wynajem.FK__Oferta__idM__72C60C4A">
+            <End Role="DaneMieszkania" EntitySet="DaneMieszkanias" />
+            <End Role="Oferta" EntitySet="Ofertas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__idK__6FE99F9F" Association="Wynajem.FK__Log__idK__6FE99F9F">
+            <End Role="Klient" EntitySet="Klients" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__idW__70DDC3D8" Association="Wynajem.FK__Log__idW__70DDC3D8">
+            <End Role="Wlasciciel" EntitySet="Wlasciciels" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bilan">
+          <Key>
+            <PropertyRef Name="idB" />
+          </Key>
+          <Property Name="idB" Type="Int32" Nullable="false" />
+          <Property Name="idM" Type="Int32" />
+          <Property Name="dataTransakcji" Type="DateTime" Precision="3" />
+          <Property Name="kwota" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="kategoria" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="notka" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DaneMieszkania" Relationship="Wynajem.FK__Bilans__idM__73BA3083" FromRole="Bilan" ToRole="DaneMieszkania" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="idL" />
+          </Key>
+          <Property Name="idL" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="idK" Type="Int32" />
+          <Property Name="idW" Type="Int32" />
+          <Property Name="idA" Type="Int32" />
+          <NavigationProperty Name="Administrator" Relationship="Wynajem.FK__Log__idA__71D1E811" FromRole="Log" ToRole="Administrator" />
+          <NavigationProperty Name="Klient" Relationship="Wynajem.FK__Log__idK__6FE99F9F" FromRole="Log" ToRole="Klient" />
+          <NavigationProperty Name="Wlasciciel" Relationship="Wynajem.FK__Log__idW__70DDC3D8" FromRole="Log" ToRole="Wlasciciel" />
+        </EntityType>
+        <EntityType Name="Oferta">
+          <Key>
+            <PropertyRef Name="idO" />
+          </Key>
+          <Property Name="idO" Type="Int32" Nullable="false" />
+          <Property Name="dataWystawienia" Type="DateTime" Precision="3" />
+          <Property Name="idM" Type="Int32" />
+          <Property Name="opis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="cenaZaMiesiac" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="wyposazenie" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="metraz" Type="Double" />
+          <Property Name="aktualne" Type="Boolean" />
+          <NavigationProperty Name="DaneMieszkania" Relationship="Wynajem.FK__Oferta__idM__72C60C4A" FromRole="Oferta" ToRole="DaneMieszkania" />
+        </EntityType>
+        <Association Name="FK__Log__idA__71D1E811">
+          <End Type="Wynajem.Administrator" Role="Administrator" Multiplicity="0..1" />
+          <End Type="Wynajem.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="idA" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="idA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bilans__idM__73BA3083">
+          <End Type="Wynajem.DaneMieszkania" Role="DaneMieszkania" Multiplicity="0..1" />
+          <End Type="Wynajem.Bilan" Role="Bilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DaneMieszkania">
+              <PropertyRef Name="idM" />
+            </Principal>
+            <Dependent Role="Bilan">
+              <PropertyRef Name="idM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oferta__idM__72C60C4A">
+          <End Type="Wynajem.DaneMieszkania" Role="DaneMieszkania" Multiplicity="0..1" />
+          <End Type="Wynajem.Oferta" Role="Oferta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DaneMieszkania">
+              <PropertyRef Name="idM" />
+            </Principal>
+            <Dependent Role="Oferta">
+              <PropertyRef Name="idM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__idK__6FE99F9F">
+          <End Type="Wynajem.Klient" Role="Klient" Multiplicity="0..1" />
+          <End Type="Wynajem.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="idK" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="idK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__idW__70DDC3D8">
+          <End Type="Wynajem.Wlasciciel" Role="Wlasciciel" Multiplicity="0..1" />
+          <End Type="Wynajem.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wlasciciel">
+              <PropertyRef Name="idW" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WynajemStoreContainer" CdmEntityContainer="Baza_wynajmuEntities">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="Wynajem.Administrator">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="idA" ColumnName="idA" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DaneMieszkanias">
+            <EntityTypeMapping TypeName="Wynajem.DaneMieszkania">
+              <MappingFragment StoreEntitySet="DaneMieszkania">
+                <ScalarProperty Name="idM" ColumnName="idM" />
+                <ScalarProperty Name="idW" ColumnName="idW" />
+                <ScalarProperty Name="idK" ColumnName="idK" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="kodPocztowy" ColumnName="kodPocztowy" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="nrBudynku" ColumnName="nrBudynku" />
+                <ScalarProperty Name="nrMieszkania" ColumnName="nrMieszkania" />
+                <ScalarProperty Name="doWynajecia" ColumnName="doWynajecia" />
+                <ScalarProperty Name="doRemontu" ColumnName="doRemontu" />
+                <ScalarProperty Name="kosztaRemontow" ColumnName="kosztaRemontow" />
+                <ScalarProperty Name="poczatekWynajmu" ColumnName="poczatekWynajmu" />
+                <ScalarProperty Name="koniecWynajmu" ColumnName="koniecWynajmu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klients">
+            <EntityTypeMapping TypeName="Wynajem.Klient">
+              <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="idK" ColumnName="idK" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nrKonta" ColumnName="nrKonta" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Wynajem.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wlasciciels">
+            <EntityTypeMapping TypeName="Wynajem.Wlasciciel">
+              <MappingFragment StoreEntitySet="Wlasciciel">
+                <ScalarProperty Name="idW" ColumnName="idW" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nrKonta" ColumnName="nrKonta" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bilans">
+            <EntityTypeMapping TypeName="Wynajem.Bilan">
+              <MappingFragment StoreEntitySet="Bilans">
+                <ScalarProperty Name="notka" ColumnName="notka" />
+                <ScalarProperty Name="kategoria" ColumnName="kategoria" />
+                <ScalarProperty Name="kwota" ColumnName="kwota" />
+                <ScalarProperty Name="dataTransakcji" ColumnName="dataTransakcji" />
+                <ScalarProperty Name="idM" ColumnName="idM" />
+                <ScalarProperty Name="idB" ColumnName="idB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="Wynajem.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="idA" ColumnName="idA" />
+                <ScalarProperty Name="idW" ColumnName="idW" />
+                <ScalarProperty Name="idK" ColumnName="idK" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="idL" ColumnName="idL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ofertas">
+            <EntityTypeMapping TypeName="Wynajem.Oferta">
+              <MappingFragment StoreEntitySet="Oferta">
+                <ScalarProperty Name="aktualne" ColumnName="aktualne" />
+                <ScalarProperty Name="metraz" ColumnName="metraz" />
+                <ScalarProperty Name="wyposazenie" ColumnName="wyposazenie" />
+                <ScalarProperty Name="cenaZaMiesiac" ColumnName="cenaZaMiesiac" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="idM" ColumnName="idM" />
+                <ScalarProperty Name="dataWystawienia" ColumnName="dataWystawienia" />
+                <ScalarProperty Name="idO" ColumnName="idO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

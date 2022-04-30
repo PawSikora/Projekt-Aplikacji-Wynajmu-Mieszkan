@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6770eb74da164b2aabdb80962100227b" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="Wynajem.Administrator" Width="1.5" PointX="1.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wynajem.DaneMieszkania" Width="1.5" PointX="4.625" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wynajem.Klient" Width="1.5" PointX="7.625" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wynajem.sysdiagram" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wynajem.Wlasciciel" Width="1.5" PointX="1.375" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="Wynajem.FK__DaneMieszka__idK__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="Wynajem.FK__DaneMieszka__idW__60A75C0F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Wynajem.Bilan" Width="1.5" PointX="2.25" PointY="5.375" />
+        <EntityTypeShape EntityType="Wynajem.Log" Width="1.5" PointX="4.125" PointY="0.5" />
+        <EntityTypeShape EntityType="Wynajem.Oferta" Width="1.5" PointX="6.875" PointY="5.375" />
+        <AssociationConnector Association="Wynajem.FK__Log__idA__71D1E811" />
+        <AssociationConnector Association="Wynajem.FK__Bilans__idM__73BA3083" />
+        <AssociationConnector Association="Wynajem.FK__Oferta__idM__72C60C4A" />
+        <AssociationConnector Association="Wynajem.FK__Log__idK__6FE99F9F" />
+        <AssociationConnector Association="Wynajem.FK__Log__idW__70DDC3D8" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
