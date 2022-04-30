@@ -25,6 +25,8 @@ namespace Projekt_PBD
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            WlascicielOkno wlasciciel = new WlascicielOkno();
+            wlasciciel.ShowDialog();
         }
 
         private void btnZaloguj_Click(object sender, RoutedEventArgs e)

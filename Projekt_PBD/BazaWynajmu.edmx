@@ -75,16 +75,6 @@
           <Property Name="metraz" Type="float" />
           <Property Name="aktualne" Type="bit" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Wlasciciel">
           <Key>
             <PropertyRef Name="idW" />
@@ -95,7 +85,7 @@
           <Property Name="imie" Type="nvarchar" MaxLength="255" />
           <Property Name="nazwisko" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__Bilans__idM__07C12930">
+        <Association Name="FK__Bilans__idM__1FCDBCEB">
           <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="0..1" />
           <End Role="Bilans" Type="Self.Bilans" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,7 +97,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DaneMieszka__idK__09A971A2">
+        <Association Name="FK__DaneMieszka__idK__21B6055D">
           <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
           <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +109,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DaneMieszka__idW__08B54D69">
+        <Association Name="FK__DaneMieszka__idW__20C1E124">
           <End Role="Wlasciciel" Type="Self.Wlasciciel" Multiplicity="0..1" />
           <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,7 +121,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Log__idA__05D8E0BE">
+        <Association Name="FK__Log__idA__1DE57479">
           <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
           <End Role="Log" Type="Self.Log" Multiplicity="*" />
           <ReferentialConstraint>
@@ -143,7 +133,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Log__idK__03F0984C">
+        <Association Name="FK__Log__idK__1BFD2C07">
           <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
           <End Role="Log" Type="Self.Log" Multiplicity="*" />
           <ReferentialConstraint>
@@ -155,7 +145,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Log__idW__04E4BC85">
+        <Association Name="FK__Log__idW__1CF15040">
           <End Role="Wlasciciel" Type="Self.Wlasciciel" Multiplicity="0..1" />
           <End Role="Log" Type="Self.Log" Multiplicity="*" />
           <ReferentialConstraint>
@@ -167,7 +157,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Oferta__idM__06CD04F7">
+        <Association Name="FK__Oferta__idM__1ED998B2">
           <End Role="DaneMieszkania" Type="Self.DaneMieszkania" Multiplicity="0..1" />
           <End Role="Oferta" Type="Self.Oferta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -186,33 +176,32 @@
           <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Oferta" EntityType="Self.Oferta" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wlasciciel" EntityType="Self.Wlasciciel" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Bilans__idM__07C12930" Association="Self.FK__Bilans__idM__07C12930">
+          <AssociationSet Name="FK__Bilans__idM__1FCDBCEB" Association="Self.FK__Bilans__idM__1FCDBCEB">
             <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
             <End Role="Bilans" EntitySet="Bilans" />
           </AssociationSet>
-          <AssociationSet Name="FK__DaneMieszka__idK__09A971A2" Association="Self.FK__DaneMieszka__idK__09A971A2">
+          <AssociationSet Name="FK__DaneMieszka__idK__21B6055D" Association="Self.FK__DaneMieszka__idK__21B6055D">
             <End Role="Klient" EntitySet="Klient" />
             <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
           </AssociationSet>
-          <AssociationSet Name="FK__DaneMieszka__idW__08B54D69" Association="Self.FK__DaneMieszka__idW__08B54D69">
+          <AssociationSet Name="FK__DaneMieszka__idW__20C1E124" Association="Self.FK__DaneMieszka__idW__20C1E124">
             <End Role="Wlasciciel" EntitySet="Wlasciciel" />
             <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
           </AssociationSet>
-          <AssociationSet Name="FK__Log__idA__05D8E0BE" Association="Self.FK__Log__idA__05D8E0BE">
+          <AssociationSet Name="FK__Log__idA__1DE57479" Association="Self.FK__Log__idA__1DE57479">
             <End Role="Administrator" EntitySet="Administrator" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
-          <AssociationSet Name="FK__Log__idK__03F0984C" Association="Self.FK__Log__idK__03F0984C">
+          <AssociationSet Name="FK__Log__idK__1BFD2C07" Association="Self.FK__Log__idK__1BFD2C07">
             <End Role="Klient" EntitySet="Klient" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
-          <AssociationSet Name="FK__Log__idW__04E4BC85" Association="Self.FK__Log__idW__04E4BC85">
+          <AssociationSet Name="FK__Log__idW__1CF15040" Association="Self.FK__Log__idW__1CF15040">
             <End Role="Wlasciciel" EntitySet="Wlasciciel" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
-          <AssociationSet Name="FK__Oferta__idM__06CD04F7" Association="Self.FK__Oferta__idM__06CD04F7">
+          <AssociationSet Name="FK__Oferta__idM__1ED998B2" Association="Self.FK__Oferta__idM__1ED998B2">
             <End Role="DaneMieszkania" EntitySet="DaneMieszkania" />
             <End Role="Oferta" EntitySet="Oferta" />
           </AssociationSet>
@@ -263,16 +252,6 @@
           <NavigationProperty Name="DaneMieszkanias" Relationship="Self.FK__DaneMieszka__idK__619B8048" FromRole="Klient" ToRole="DaneMieszkania" />
           <NavigationProperty Name="Logs" Relationship="Wynajem.FK__Log__idK__6FE99F9F" FromRole="Klient" ToRole="Log" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Wlasciciel">
           <Key>
             <PropertyRef Name="idW" />
@@ -313,7 +292,6 @@
           <EntitySet Name="Administrators" EntityType="Self.Administrator" />
           <EntitySet Name="DaneMieszkanias" EntityType="Self.DaneMieszkania" />
           <EntitySet Name="Klients" EntityType="Self.Klient" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Wlasciciels" EntityType="Self.Wlasciciel" />
           <AssociationSet Name="FK__DaneMieszka__idK__619B8048" Association="Self.FK__DaneMieszka__idK__619B8048">
             <End Role="Klient" EntitySet="Klients" />
@@ -488,17 +466,6 @@
                 <ScalarProperty Name="nrKonta" ColumnName="nrKonta" />
                 <ScalarProperty Name="imie" ColumnName="imie" />
                 <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Wynajem.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

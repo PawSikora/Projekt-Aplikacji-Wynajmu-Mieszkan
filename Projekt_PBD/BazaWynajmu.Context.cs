@@ -28,7 +28,6 @@ namespace Projekt_PBD
         public virtual DbSet<Administrator> Administrators { get; set; }
         public virtual DbSet<DaneMieszkania> DaneMieszkanias { get; set; }
         public virtual DbSet<Klient> Klients { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Wlasciciel> Wlasciciels { get; set; }
         public virtual DbSet<Bilan> Bilans { get; set; }
         public virtual DbSet<Log> Logs { get; set; }

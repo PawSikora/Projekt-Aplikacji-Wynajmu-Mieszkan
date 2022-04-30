@@ -1,0 +1,21 @@
+﻿<Window x:Class="Projekt_PBD.WlascicielOkno"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt_PBD"
+        mc:Ignorable="d"
+        Title="WlascicielOkno" Height="383" Width="517">
+    <Grid Margin="0,0,11,8">
+        <Label x:Name="lblImie" Content="Imię:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblNazwisko" Content="Nazwisko:" HorizontalAlignment="Left" Margin="30,57,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtImie" HorizontalAlignment="Left" Height="23" Margin="136,29,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <TextBox x:Name="txtNazwisko" HorizontalAlignment="Left" Height="23" Margin="136,61,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <Label x:Name="lblDaneMieszkania" Content="Dane mieszkania:" HorizontalAlignment="Left" Margin="30,109,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDaneMieszkania" HorizontalAlignment="Left" Height="144" Margin="136,113,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="305" IsReadOnly="True"/>
+        <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="338,30,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxMieszkania_SelectionChanged"/>
+        <Button x:Name="btnBilans" Content="Bilans" HorizontalAlignment="Left" Margin="30,292,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnZakoncz" Content="Zakończ" HorizontalAlignment="Left" Margin="383,292,0,0" VerticalAlignment="Top" Width="75" Click="btnZakoncz_Click"/>
+
+    </Grid>
+</Window>

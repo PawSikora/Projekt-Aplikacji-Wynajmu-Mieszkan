@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="Wynajem.Administrator" Width="1.5" PointX="1.875" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Wynajem.DaneMieszkania" Width="1.5" PointX="4.625" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Wynajem.Klient" Width="1.5" PointX="7.625" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Wynajem.sysdiagram" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Wynajem.Wlasciciel" Width="1.5" PointX="1.375" PointY="2.75" IsExpanded="true" />
         <AssociationConnector Association="Wynajem.FK__DaneMieszka__idK__619B8048" ManuallyRouted="false" />
         <AssociationConnector Association="Wynajem.FK__DaneMieszka__idW__60A75C0F" ManuallyRouted="false" />
