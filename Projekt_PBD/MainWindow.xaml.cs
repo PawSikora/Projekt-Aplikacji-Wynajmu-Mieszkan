@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -32,20 +33,37 @@ namespace Projekt_PBD
         {
             //DaneMieszkania x = context.DaneMieszkanias.Where(d => d.idM == 2 ).First();
             //var klient = new Klient() { email = "klient4.com", imie = "Mati", nazwisko = "Bachi", DaneMieszkanias = new List<DaneMieszkania>(){x}, nrKonta = 246810};
-            if (txtLogin.Text == "W")
+            Log user = Validate(txtLogin.Text,txtHaslo.Password);
+
+
+            if (user != null)
             {
-                var owner = context.Wlasciciels.First();
-                WlascicielOkno wlasciciel = new WlascicielOkno(owner);
-                wlasciciel.ShowDialog();
-                Close();
+                if (user.idA != null)
+                {
+                    // context.Administrators.Where(a => a.idA == user.idA).First();
+                    MessageBox.Show("AdminLog");
+                }
+                else if (user.idK != null)
+                {
+                    var client = context.Klients.Where(k => k.idK == user.idK).First();
+                    KlientOkno klient = new KlientOkno(client);
+                    Close();
+                    klient.ShowDialog();
+                }
+                else if (user.idW != null)
+                {
+                    var owner = context.Wlasciciels.Where(w => w.idW == user.idW).First();
+                    WlascicielOkno wlasciciel = new WlascicielOkno(owner);
+                    Close();
+                    wlasciciel.ShowDialog();
+                }
             }
-            else if (txtLogin.Text == "K")
-            {
-                var client = context.Klients.First();
-                KlientOkno klient = new KlientOkno(client);
-                klient.ShowDialog();
-                Close();
-            }
+            else MessageBox.Show("Błąd Nazwy lub hasła");
+        }
+
+        public Log Validate(string Email, string Haslo)
+        {
+            return context.Logs.Where(m => m.email == Email).Where(n => n.haslo == Haslo).FirstOrDefault();
         }
     }
 }
