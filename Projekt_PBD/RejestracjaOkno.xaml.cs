@@ -23,14 +23,17 @@ namespace Projekt_PBD
         public RejestracjaOkno()
         {
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
+        void Zamknij()
+        {
+            new MainWindow().Show();
+            this.Close();
+        }
+
         Baza_wynajmuEntities context=new Baza_wynajmuEntities();
-
-
         private void btnUwtorzKonto_Click(object sender, RoutedEventArgs e)
         {
-
-            
 
             if (pwbHaslo.Password == pwbPowtorzHaslo.Password && tbxEmail.Text.Length > 0 && tbxEmail.Text.Contains("@") &&
                 tbxImie.Text.Length > 0 && tbxNazwisko.Text.Length>0 && tbxNrKonta.Text.Length>0) 
@@ -52,9 +55,8 @@ namespace Projekt_PBD
                         log.idK = context.Klients.Where(k => k.email == tbxEmail.Text).Select(i=>i.idK).First();
                         context.Logs.Add(log);
                         context.SaveChanges();
-
                     }                    
-                    if (rdbCzyKlient.IsChecked == false)
+                    if (rdbCzyWlasciciel.IsChecked == true)
                     {
                         Wlasciciel wlasciciel = new Wlasciciel();
                         wlasciciel.email=   tbxEmail.Text;
@@ -71,15 +73,13 @@ namespace Projekt_PBD
                         context.SaveChanges();
 
                     }
-                    
                 }
-                new MainWindow().Show();
-                this.Close();
+                Zamknij();
             }
-
-            
-            
-
+        }
+        private void btnAnuluj_Click(object sender, RoutedEventArgs e)
+        {
+            Zamknij();
         }
     }
 }

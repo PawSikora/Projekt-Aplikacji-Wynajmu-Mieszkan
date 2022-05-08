@@ -39,8 +39,8 @@ namespace Projekt_PBD
 
         private void btnZakoncz_Click(object sender, RoutedEventArgs e)
         {
+            new MainWindow().Show();
             Close();
-            new MainWindow().ShowDialog();
         }
     }
 }

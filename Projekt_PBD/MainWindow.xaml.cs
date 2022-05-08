@@ -31,11 +31,8 @@ namespace Projekt_PBD
 
         private void btnZaloguj_Click(object sender, RoutedEventArgs e)
         {
-            //DaneMieszkania x = context.DaneMieszkanias.Where(d => d.idM == 2 ).First();
-            //var klient = new Klient() { email = "klient4.com", imie = "Mati", nazwisko = "Bachi", DaneMieszkanias = new List<DaneMieszkania>(){x}, nrKonta = 246810};
+
             Log user = Validate(txtLogin.Text,txtHaslo.Password);
-
-
             if (user != null)
             {
                 if (user.idA != null)
@@ -58,7 +55,7 @@ namespace Projekt_PBD
                     wlasciciel.ShowDialog();
                 }
             }
-            else MessageBox.Show("Błąd Nazwy lub hasła");
+            else MessageBox.Show("Błąd nazwy lub hasła");
         }
 
         public Log Validate(string Email, string Haslo)
