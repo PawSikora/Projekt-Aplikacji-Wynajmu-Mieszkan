@@ -7,15 +7,19 @@
         mc:Ignorable="d"
         Title="WlascicielOkno" Height="383" Width="517">
     <Grid Margin="0,0,11,8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="321*"/>
+            <ColumnDefinition Width="185*"/>
+        </Grid.ColumnDefinitions>
         <Label x:Name="lblImie" Content="Imię:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblNazwisko" Content="Nazwisko:" HorizontalAlignment="Left" Margin="30,57,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtImie" HorizontalAlignment="Left" Height="23" Margin="136,29,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <TextBox x:Name="txtNazwisko" HorizontalAlignment="Left" Height="23" Margin="136,61,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <TextBox x:Name="tbxImie" HorizontalAlignment="Left" Height="23" Margin="136,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <TextBox x:Name="tbxNazwisko" HorizontalAlignment="Left" Height="23" Margin="136,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="lblDaneMieszkania" Content="Dane mieszkania:" HorizontalAlignment="Left" Margin="30,109,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtDaneMieszkania" HorizontalAlignment="Left" Height="144" Margin="136,113,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="305" IsReadOnly="True"/>
-        <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="338,30,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxMieszkania_SelectionChanged"/>
+        <TextBox x:Name="tbxDaneMieszkania" HorizontalAlignment="Left" Height="144" Margin="136,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" IsReadOnly="True" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="318,30,0,0" VerticalAlignment="Top" Width="155" SelectionChanged="cbxMieszkania_SelectionChanged" SelectedIndex="0" Grid.ColumnSpan="2"/>
         <Button x:Name="btnBilans" Content="Bilans" HorizontalAlignment="Left" Margin="30,292,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnZakoncz" Content="Zakończ" HorizontalAlignment="Left" Margin="383,292,0,0" VerticalAlignment="Top" Width="75" Click="btnZakoncz_Click"/>
+        <Button x:Name="btnZakoncz" Content="Zakończ" HorizontalAlignment="Left" Margin="62,292,0,0" VerticalAlignment="Top" Width="75" Click="btnZakoncz_Click" Grid.Column="1"/>
 
     </Grid>
 </Window>

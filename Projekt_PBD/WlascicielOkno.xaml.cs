@@ -20,37 +20,37 @@ namespace Projekt_PBD
     public partial class WlascicielOkno : Window
     {
         Baza_wynajmuEntities context = new Baza_wynajmuEntities();
-        public WlascicielOkno()
+        private Wlasciciel wlasciciel;
+        public WlascicielOkno(Wlasciciel wlasciciel)
         {
             InitializeComponent();
-            var mieszkania = context.DaneMieszkanias;
+            this.wlasciciel = wlasciciel;
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            tbxImie.Text = wlasciciel.imie;
+            tbxNazwisko.Text = wlasciciel.nazwisko;
+            var mieszkania = wlasciciel.DaneMieszkanias.Where(m => m.idW==wlasciciel.idW);
             foreach (var x in mieszkania)
             {
-                cbxMieszkania.Items.Add(x.kodPocztowy);
+                cbxMieszkania.Items.Add($"{x.Miasto} {x.Ulica} {x.nrBudynku}/{x.nrMieszkania}");
             }
         }
 
         private void btnZakoncz_Click(object sender, RoutedEventArgs e)
         {
             Close();
+            new MainWindow().ShowDialog();
         }
 
         private void cbxMieszkania_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var mieszkania = context.DaneMieszkanias;
-            //List<DaneMieszkania> tmp = new List<DaneMieszkania>();
-            //tmp = mieszkania.ToList();
-            //txtDaneMieszkania.Text = tmp[cbxMieszkania.SelectedIndex].Miasto.ToString();
             Wyswietl();
         }
         public void Wyswietl()
         {
-            txtDaneMieszkania.Clear();
+            tbxDaneMieszkania.Clear();
             var selected = context.DaneMieszkanias.ToList()[cbxMieszkania.SelectedIndex];
-            txtDaneMieszkania.AppendText($"ul. {selected.Ulica.ToString()} {selected.nrBudynku.ToString()}/{selected.nrMieszkania.ToString()}\n");
-            txtDaneMieszkania.AppendText($"{selected.kodPocztowy.ToString()} {selected.Miasto.ToString()}");
-            
+            tbxDaneMieszkania.AppendText($"ul. {selected.Ulica.ToString()} {selected.nrBudynku.ToString()}/{selected.nrMieszkania.ToString()}\n");
+            tbxDaneMieszkania.AppendText($"{selected.kodPocztowy.ToString()} {selected.Miasto.ToString()}");
         }
-        
     }
 }

@@ -25,19 +25,27 @@ namespace Projekt_PBD
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            WlascicielOkno wlasciciel = new WlascicielOkno();
-            wlasciciel.ShowDialog();
         }
+        Baza_wynajmuEntities context = new Baza_wynajmuEntities();
 
         private void btnZaloguj_Click(object sender, RoutedEventArgs e)
         {
-            var context = new Baza_wynajmuEntities();
-            DaneMieszkania tmp = new DaneMieszkania();
-            DaneMieszkania x = context.DaneMieszkanias.Where(d => d.idM == 2 ).First();
-            var klient = new Klient() { email = "klient4.com", imie = "Mati", nazwisko = "Bachi", DaneMieszkanias = new List<DaneMieszkania>(){x}, nrKonta = 246810};
-            context.Klients.Add(klient);
-            context.SaveChanges();
-
+            //DaneMieszkania x = context.DaneMieszkanias.Where(d => d.idM == 2 ).First();
+            //var klient = new Klient() { email = "klient4.com", imie = "Mati", nazwisko = "Bachi", DaneMieszkanias = new List<DaneMieszkania>(){x}, nrKonta = 246810};
+            if (txtLogin.Text == "W")
+            {
+                var owner = context.Wlasciciels.First();
+                WlascicielOkno wlasciciel = new WlascicielOkno(owner);
+                wlasciciel.ShowDialog();
+                Close();
+            }
+            else if (txtLogin.Text == "K")
+            {
+                var client = context.Klients.First();
+                KlientOkno klient = new KlientOkno(client);
+                klient.ShowDialog();
+                Close();
+            }
         }
     }
 }
