@@ -28,9 +28,12 @@ namespace Projekt_PBD
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             tbxImie.Text = klient.imie;
             tbxNazwisko.Text = klient.nazwisko;
-            var mieszkanieKlienta = klient.DaneMieszkanias.Where(m => m.idK == klient.idK).First();
+            var mieszkanieKlienta = klient.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
+            if(mieszkanieKlienta != null)
+            {
             tbxDaneMieszkania.AppendText($"ul. {mieszkanieKlienta.Ulica} {mieszkanieKlienta.nrBudynku}/{mieszkanieKlienta.nrMieszkania}\n");
             tbxDaneMieszkania.AppendText($"{mieszkanieKlienta.kodPocztowy} {mieszkanieKlienta.Miasto}");
+            }
         }
 
 

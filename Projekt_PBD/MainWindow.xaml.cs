@@ -65,5 +65,13 @@ namespace Projekt_PBD
         {
             return context.Logs.Where(m => m.email == Email).Where(n => n.haslo == Haslo).FirstOrDefault();
         }
+
+        private void btnZarejestruj_Click(object sender, RoutedEventArgs e)
+        {
+            RejestracjaOkno okno = new RejestracjaOkno();
+            this.Close();
+            okno.ShowDialog();
+            
+        }
     }
 }

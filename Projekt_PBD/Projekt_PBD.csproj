@@ -118,6 +118,9 @@
     <Compile Include="Oferta.cs">
       <DependentUpon>BazaWynajmu.tt</DependentUpon>
     </Compile>
+    <Compile Include="RejestracjaOkno.xaml.cs">
+      <DependentUpon>RejestracjaOkno.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wlasciciel.cs">
       <DependentUpon>BazaWynajmu.tt</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RejestracjaOkno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WlascicielOkno.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

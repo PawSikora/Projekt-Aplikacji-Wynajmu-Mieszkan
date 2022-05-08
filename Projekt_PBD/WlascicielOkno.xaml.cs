@@ -31,7 +31,9 @@ namespace Projekt_PBD
             var mieszkania = wlasciciel.DaneMieszkanias.Where(m => m.idW==wlasciciel.idW);
             foreach (var x in mieszkania)
             {
-                cbxMieszkania.Items.Add($"{x.Miasto} {x.Ulica} {x.nrBudynku}/{x.nrMieszkania}");
+                if(x!=null) cbxMieszkania.Items.Add($"{x.Miasto} {x.Ulica} {x.nrBudynku}/{x.nrMieszkania}");
+
+
             }
         }
 
@@ -48,9 +50,14 @@ namespace Projekt_PBD
         public void Wyswietl()
         {
             tbxDaneMieszkania.Clear();
+            
             var selected = context.DaneMieszkanias.ToList()[cbxMieszkania.SelectedIndex];
-            tbxDaneMieszkania.AppendText($"ul. {selected.Ulica.ToString()} {selected.nrBudynku.ToString()}/{selected.nrMieszkania.ToString()}\n");
-            tbxDaneMieszkania.AppendText($"{selected.kodPocztowy.ToString()} {selected.Miasto.ToString()}");
+            if (selected != null)
+            {
+                tbxDaneMieszkania.AppendText($"ul. {selected.Ulica.ToString()} {selected.nrBudynku.ToString()}/{selected.nrMieszkania.ToString()}\n");
+                tbxDaneMieszkania.AppendText($"{selected.kodPocztowy.ToString()} {selected.Miasto.ToString()}");
+            }
+
         }
     }
 }
