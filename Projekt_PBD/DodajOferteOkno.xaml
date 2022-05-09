@@ -1,0 +1,22 @@
+﻿<Window x:Class="Projekt_PBD.DodajOferteOkno"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt_PBD"
+        mc:Ignorable="d"
+        Title="DodajOferteOkno" Height="429" Width="891">
+    <Grid>
+        <TextBox x:Name="tbxWyposazenie" HorizontalAlignment="Left" Margin="97,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Height="143"/>
+        <TextBox x:Name="tbxOpis" HorizontalAlignment="Left" Margin="312,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="552" Height="270"/>
+        <TextBox x:Name="tbxMetraz" HorizontalAlignment="Left" Margin="130,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="23"/>
+        <TextBox x:Name="tbxCenaZaMiesiac" HorizontalAlignment="Left" Margin="126,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="25"/>
+        <Label Content="metraz" HorizontalAlignment="Left" Margin="210,64,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cena Za Miesiac" HorizontalAlignment="Left" Margin="155,156,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="Wyposazenie" HorizontalAlignment="Left" Margin="155,229,0,0" VerticalAlignment="Top"/>
+        <Label Content="Opis" HorizontalAlignment="Left" Margin="571,26,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="424,370,0,0" VerticalAlignment="Top" Click="btnDodaj_Click"/>
+        <Button x:Name="btnZakoncz" Content="Zakoncz" HorizontalAlignment="Left" Margin="588,365,0,0" VerticalAlignment="Top" Click="btnZakoncz_Click"/>
+
+    </Grid>
+</Window>

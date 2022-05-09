@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_PBD"
         mc:Ignorable="d"
-        Title="WlascicielOkno" Height="383" Width="517">
+        Title="WlascicielOkno" Height="383" Width="549">
     <Grid Margin="0,0,11,8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="321*"/>
@@ -20,6 +20,8 @@
         <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="318,30,0,0" VerticalAlignment="Top" Width="155" SelectionChanged="cbxMieszkania_SelectionChanged" SelectedIndex="0" Grid.ColumnSpan="2"/>
         <Button x:Name="btnBilans" Content="Bilans" HorizontalAlignment="Left" Margin="30,292,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnZakoncz" Content="Zakończ" HorizontalAlignment="Left" Margin="62,292,0,0" VerticalAlignment="Top" Width="75" Click="btnZakoncz_Click" Grid.Column="1"/>
+        <Button x:Name="btnDodajeMieszkanie" Content="Dodaj Mieszkanie" HorizontalAlignment="Left" Margin="281,292,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="btnDodajeMieszkanie_Click"/>
+        <Button x:Name="btnWystawOferte" Content="Wystaw Oferte" HorizontalAlignment="Left" Margin="110,292,0,0" VerticalAlignment="Top" Width="166" Click="btnWystawOferte_Click"/>
 
     </Grid>
 </Window>
