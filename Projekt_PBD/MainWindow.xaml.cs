@@ -58,9 +58,9 @@ namespace Projekt_PBD
             else MessageBox.Show("Błąd nazwy lub hasła");
         }
 
-        public Log Validate(string Email, string Haslo)
+        public Log Validate(string email, string haslo)
         {
-            return context.Logs.Where(m => m.email == Email).Where(n => n.haslo == Haslo).FirstOrDefault();
+            return context.Logs.Where(m => m.email == email).Where(n => n.haslo == haslo).FirstOrDefault();
         }
 
         private void btnZarejestruj_Click(object sender, RoutedEventArgs e)

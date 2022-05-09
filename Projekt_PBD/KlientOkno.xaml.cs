@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,6 @@ namespace Projekt_PBD
     /// </summary>
     public partial class KlientOkno : Window
     {
-        Baza_wynajmuEntities context = new Baza_wynajmuEntities();
         private Klient klient;
         public KlientOkno(Klient klient)
         {
@@ -30,10 +30,11 @@ namespace Projekt_PBD
             tbxNazwisko.Text = klient.nazwisko;
             var mieszkanieKlienta = klient.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
             if(mieszkanieKlienta != null)
-            {
-            tbxDaneMieszkania.AppendText($"ul. {mieszkanieKlienta.Ulica} {mieszkanieKlienta.nrBudynku}/{mieszkanieKlienta.nrMieszkania}\n");
-            tbxDaneMieszkania.AppendText($"{mieszkanieKlienta.kodPocztowy} {mieszkanieKlienta.Miasto}");
+            { 
+                tbxDaneMieszkania.AppendText($"ul. {mieszkanieKlienta.Ulica} {mieszkanieKlienta.nrBudynku}/{mieszkanieKlienta.nrMieszkania}\n");
+                tbxDaneMieszkania.AppendText($"{mieszkanieKlienta.kodPocztowy} {mieszkanieKlienta.Miasto}");
             }
+            if (klient.DaneMieszkanias.Where(k => k.idK == klient.idK).FirstOrDefault() == null) btnWypowiedzUmowe.IsEnabled = false;
         }
 
 
@@ -41,6 +42,21 @@ namespace Projekt_PBD
         {
             new MainWindow().Show();
             Close();
+        }
+
+        private void btnOfertyWynajmu_Click(object sender, RoutedEventArgs e)
+        {
+            new OfertyWynajmuOkno(klient).ShowDialog();
+        }
+
+        private void btnWypowiedzUmowe_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult m = MessageBox.Show("Czy na pewno chcesz wypowiedzieć umowę?",
+                "Wypowiedzenie umowy", MessageBoxButton.YesNo);
+            if (m == MessageBoxResult.Yes)
+            {
+                MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
+            }
         }
     }
 }

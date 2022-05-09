@@ -21,20 +21,18 @@ namespace Projekt_PBD
     {
         private Wlasciciel wlasciciel;
         private DaneMieszkania mieszkanie;
-        private Baza_wynajmuEntities context ;
+        private Baza_wynajmuEntities context;
         public DodajOferteOkno()
         {
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             context = new Baza_wynajmuEntities();
         }
 
-        public DodajOferteOkno(Wlasciciel Wlasciciel, DaneMieszkania Mieszkanie) : this()
+        public DodajOferteOkno(Wlasciciel wlasciciel, DaneMieszkania mieszkanie) : this()
         {
-            this.mieszkanie=Mieszkanie;
-            this.wlasciciel=Wlasciciel;
-            
-
-
+            this.mieszkanie=mieszkanie;
+            this.wlasciciel=wlasciciel;
         }
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
@@ -49,19 +47,22 @@ namespace Projekt_PBD
                     oferta.aktualne = true;
                     oferta.cenaZaMiesiac = Convert.ToDecimal(tbxCenaZaMiesiac.Text);
                     oferta.opis = tbxOpis.Text;
-                    oferta.wyposazenie=tbxWyposazenie.Text;
-                    oferta.dataWystawienia=DateTime.Now;
-                    oferta.metraz =Convert.ToDouble(tbxMetraz.Text) ;
+                    oferta.wyposazenie = tbxWyposazenie.Text;
+                    oferta.dataWystawienia = DateTime.Now;
+                    oferta.metraz = Convert.ToDouble(tbxMetraz.Text);
                     context.Ofertas.Add(oferta);
                     context.SaveChanges();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Mieszkanie ma już ofertę");
                 }
             }
         }
-
         private void btnZakoncz_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            MessageBox.Show("N");
         }
     }
 }

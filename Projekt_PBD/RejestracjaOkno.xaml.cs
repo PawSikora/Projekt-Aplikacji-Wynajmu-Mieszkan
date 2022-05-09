@@ -34,9 +34,8 @@ namespace Projekt_PBD
         Baza_wynajmuEntities context=new Baza_wynajmuEntities();
         private void btnUwtorzKonto_Click(object sender, RoutedEventArgs e)
         {
-
             if (pwbHaslo.Password == pwbPowtorzHaslo.Password && tbxEmail.Text.Length > 0 && tbxEmail.Text.Contains("@") &&
-                tbxImie.Text.Length > 0 && tbxNazwisko.Text.Length>0 && tbxNrKonta.Text.Length>0) 
+                tbxImie.Text.Length > 0 && tbxNazwisko.Text.Length>0 && tbxNrKonta.Text.Length>0)
             {
                 if (context.Logs.Where(em => em.email == tbxEmail.Text).FirstOrDefault()==null)
                 {
@@ -71,7 +70,6 @@ namespace Projekt_PBD
                         log.idW = context.Wlasciciels.Where(w => w.email == tbxEmail.Text).Select(i=>i.idW).First();
                         context.Logs.Add(log);
                         context.SaveChanges();
-
                     }
                 }
                 Zamknij();
@@ -81,5 +79,6 @@ namespace Projekt_PBD
         {
             Zamknij();
         }
+
     }
 }

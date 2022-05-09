@@ -22,7 +22,12 @@ namespace Projekt_PBD
         public string wyposazenie { get; set; }
         public Nullable<double> metraz { get; set; }
         public Nullable<bool> aktualne { get; set; }
-    
+
+        public override string ToString()
+        {
+            return $"{DaneMieszkania.Miasto} {DaneMieszkania.Ulica} - {cenaZaMiesiac}z³";
+        }
+
         public virtual DaneMieszkania DaneMieszkania { get; set; }
     }
 }

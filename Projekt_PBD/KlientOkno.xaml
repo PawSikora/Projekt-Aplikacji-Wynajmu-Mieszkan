@@ -13,8 +13,10 @@
         <TextBox x:Name="tbxNazwisko" HorizontalAlignment="Left" Height="23" Margin="136,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="lblDaneMieszkania" Content="Adres mieszkania:" HorizontalAlignment="Left" Margin="30,109,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxDaneMieszkania" HorizontalAlignment="Left" Height="144" Margin="136,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" IsReadOnly="True"/>
-        <Button x:Name="btnHistoriaWpłat" Content="Historia Wpłat" HorizontalAlignment="Left" Margin="30,292,0,0" VerticalAlignment="Top" Width="90"/>
-        <Button x:Name="btnZakoncz" Content="Zakończ" HorizontalAlignment="Left" Margin="383,292,0,0" VerticalAlignment="Top" Width="75" Click="btnZakoncz_Click"/>
+        <Button x:Name="btnHistoriaWpłat" Content="Historia Wpłat" HorizontalAlignment="Left" Margin="30,292,0,0" VerticalAlignment="Top" Width="90" Height="20"/>
+        <Button x:Name="btnZakoncz" Content="Zakończ" HorizontalAlignment="Left" Margin="383,292,0,0" VerticalAlignment="Top" Width="75" Click="btnZakoncz_Click" Height="20"/>
+        <Button x:Name="btnOfertyWynajmu" Content="Oferty mieszkań" HorizontalAlignment="Left" Margin="136,292,0,0" VerticalAlignment="Top" Height="20" Width="95" Click="btnOfertyWynajmu_Click"/>
+        <Button x:Name="btnWypowiedzUmowe" Content="Wypowiedzenie umowy" HorizontalAlignment="Left" Margin="306,88,0,0" VerticalAlignment="Top" Width="135" Height="20" Click="btnWypowiedzUmowe_Click"/>
 
     </Grid>
 </Window>
