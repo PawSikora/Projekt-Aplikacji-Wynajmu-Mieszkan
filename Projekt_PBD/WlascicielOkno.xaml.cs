@@ -22,6 +22,7 @@ namespace Projekt_PBD
         Baza_wynajmuEntities context = new Baza_wynajmuEntities();
         private Wlasciciel wlasciciel;
         private List<DaneMieszkania> mieszkania;
+        //private int index = 0;
 
         public WlascicielOkno(Wlasciciel wlasciciel)
         {
@@ -50,8 +51,11 @@ namespace Projekt_PBD
         private void cbxMieszkania_SelectionChanged(object sender, SelectionChangedEventArgs e) => Wyswietl();
         public void Wyswietl()
         {
+            //index = cbxMieszkania.SelectedIndex;
             //if (index < 0) { index = mieszkania.Count() - 1; }
+            MessageBox.Show("SELECTION CHANGED");
             tbxDaneMieszkania.Clear();
+            //MessageBox.Show(cbxMieszkania.SelectedIndex.ToString());
             var selected = mieszkania[cbxMieszkania.SelectedIndex];
             if (selected.idK == null) { btnWypowiedzUmowe.IsEnabled = false; }
             else { btnWypowiedzUmowe.IsEnabled = true; }
@@ -83,7 +87,11 @@ namespace Projekt_PBD
                                 "Zmiana ustawień", MessageBoxButton.YesNo);
                             if (m == MessageBoxResult.Yes) { mieszkanie.doRemontu = false; }
                         }
-                        else { new DodajOferteOkno(wlasciciel, mieszkanie).ShowDialog(); }
+                        else
+                        {
+                            new DodajOferteOkno(wlasciciel, mieszkanie).Show();
+                            Close();
+                        }
                     }
                     else
                     {
@@ -97,10 +105,14 @@ namespace Projekt_PBD
                                 "Zmiana ustawien", MessageBoxButton.YesNo);
                             if (m == MessageBoxResult.Yes) { mieszkanie.doRemontu = false; }
                         }
-                        if (mieszkanie.doRemontu == false && mieszkanie.doWynajecia == true) new DodajOferteOkno(wlasciciel, mieszkanie).ShowDialog();
+                        if (mieszkanie.doRemontu == false && mieszkanie.doWynajecia == true)
+                        {
+                            new DodajOferteOkno(wlasciciel, mieszkanie).Show();
+                            Close();
+                        }
                     }
                     context.SaveChanges();
-                    WyswietlMieszkania();
+                    //WyswietlMieszkania();
                 }
                 else { MessageBox.Show("Mieszkanie jest już wynajmowane!"); }
             }
@@ -117,6 +129,10 @@ namespace Projekt_PBD
                     else mieszkanie.doRemontu = false;
                     Wyswietl();
                 }
+                else
+                {
+                    MessageBox.Show("Mieszkanie jest wynajęte!");
+                }
             }
         }
 
@@ -130,6 +146,10 @@ namespace Projekt_PBD
                     if (mieszkanie.doWynajecia == false) mieszkanie.doWynajecia = true;
                     else mieszkanie.doWynajecia = false;
                     Wyswietl();
+                }
+                else
+                {
+                    MessageBox.Show("Mieszkanie jest wynajęte!");
                 }
             }
         }

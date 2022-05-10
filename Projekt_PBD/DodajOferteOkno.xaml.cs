@@ -52,6 +52,7 @@ namespace Projekt_PBD
                     oferta.metraz = Convert.ToDouble(tbxMetraz.Text);
                     context.Ofertas.Add(oferta);
                     context.SaveChanges();
+                    new WlascicielOkno(wlasciciel).Show();
                     Close();
                 }
                 else
@@ -62,6 +63,7 @@ namespace Projekt_PBD
         }
         private void btnZakoncz_Click(object sender, RoutedEventArgs e)
         {
+            new WlascicielOkno(wlasciciel).Show();
             this.Close();
         }
     }

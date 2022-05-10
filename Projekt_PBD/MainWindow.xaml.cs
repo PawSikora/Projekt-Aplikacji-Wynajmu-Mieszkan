@@ -55,7 +55,7 @@ namespace Projekt_PBD
                     wlasciciel.ShowDialog();
                 }
             }
-            else MessageBox.Show("Błąd nazwy lub hasła");
+            else MessageBox.Show("Błąd loginu lub hasła");
         }
 
         public Log Validate(string email, string haslo)
