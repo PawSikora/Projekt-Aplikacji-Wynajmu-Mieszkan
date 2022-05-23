@@ -38,29 +38,34 @@ namespace Projekt_PBD
             if (tbxAdres.Text.Length > 0 && tbxKodPocztowy.Text.Length > 0 && tbxMiasto.Text.Length > 0 && tbxNumerMIeszkania.Text.Length>0)
             {
                 string[] tab = tbxAdres.Text.Split(' '); // 0 to Adres 1 to numer domu
-                string adres= tab[0];
-                int nrBudynku=Convert.ToInt32(tab[1]) ;
-                int nrMieszkania= Convert.ToInt32(tbxNumerMIeszkania.Text) ;
-                if (context.DaneMieszkanias.Where(a => a.Ulica == adres)
-                        .Where(nb=>nb.nrBudynku==nrBudynku)
-                        .Where(nm => nm.nrMieszkania == nrMieszkania).FirstOrDefault() == null)
+                if (tab.Length > 1)
                 {
-                    DaneMieszkania mieszkanie = new DaneMieszkania
+                    string adres = tab[0];
+                    int nrBudynku = Convert.ToInt32(tab[1]);
+                    int nrMieszkania = Convert.ToInt32(tbxNumerMIeszkania.Text);
+                    if (context.DaneMieszkanias.Where(a => a.Ulica == adres)
+                            .Where(nb => nb.nrBudynku == nrBudynku)
+                            .Where(nm => nm.nrMieszkania == nrMieszkania).FirstOrDefault() == null)
                     {
-                        Ulica = adres,
-                        nrBudynku = nrBudynku,
-                        Miasto = tbxMiasto.Text,
-                        kodPocztowy = tbxKodPocztowy.Text,
-                        nrMieszkania = nrMieszkania,
-                        idW = this.wlasciciel.idW //B I L A N S  nie jest podpiety bo nie istnieje
-                    };
-                    context.DaneMieszkanias.Add(mieszkanie);
-                    mieszkanie.doRemontu = ckbDoRemontu.IsChecked;
-                    mieszkanie.doWynajecia=ckbDoWynajmu.IsChecked;
-                    context.SaveChanges();
-                    new WlascicielOkno(wlasciciel).Show();
-                    this.Close();
+                        DaneMieszkania mieszkanie = new DaneMieszkania
+                        {
+                            Ulica = adres,
+                            nrBudynku = nrBudynku,
+                            Miasto = tbxMiasto.Text,
+                            kodPocztowy = tbxKodPocztowy.Text,
+                            nrMieszkania = nrMieszkania,
+                            idW = this.wlasciciel.idW //B I L A N S  nie jest podpiety bo nie istnieje
+                        };
+                        context.DaneMieszkanias.Add(mieszkanie);
+                        mieszkanie.doRemontu = ckbDoRemontu.IsChecked;
+                        mieszkanie.doWynajecia = ckbDoWynajmu.IsChecked;
+                        context.SaveChanges();
+                        new WlascicielOkno(wlasciciel).Show();
+                        this.Close();
+                    }
+
                 }
+                else MessageBox.Show("Podaj nr budynku po spacji w polu \"Ulica\"!");
 
             }
         }
