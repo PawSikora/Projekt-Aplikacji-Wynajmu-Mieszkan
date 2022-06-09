@@ -27,8 +27,8 @@ namespace Projekt_PBD
         public WlascicielOkno(Wlasciciel wlasciciel)
         {
             InitializeComponent();
-            this.wlasciciel = wlasciciel;
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            this.wlasciciel = wlasciciel;
             tbxImie.Text = wlasciciel.imie;
             tbxNazwisko.Text = wlasciciel.nazwisko;
             WyswietlMieszkania();
@@ -39,7 +39,19 @@ namespace Projekt_PBD
         {
             cbxMieszkania.Items.Clear();
             mieszkania = context.DaneMieszkanias.Where(m => m.idW == wlasciciel.idW).ToList();
-            foreach (var x in mieszkania) { if (x != null) cbxMieszkania.Items.Add($"{x.Miasto} {x.Ulica} {x.nrBudynku}/{x.nrMieszkania}"); }
+            foreach (var x in mieszkania)
+            {
+                if (x != null)
+                {
+                    string stan;
+                    if (x.doWynajecia == true)
+                        stan = "(Dostępne)";
+                    else
+                        stan = "(Niedostępne)";
+
+                    cbxMieszkania.Items.Add($"{x} {stan}");
+                }
+            }
         }
 
         private void btnZakoncz_Click(object sender, RoutedEventArgs e)
@@ -53,7 +65,6 @@ namespace Projekt_PBD
         {
             //index = cbxMieszkania.SelectedIndex;
             //if (index < 0) { index = mieszkania.Count() - 1; }
-            MessageBox.Show("SELECTION CHANGED");
             tbxDaneMieszkania.Clear();
             //MessageBox.Show(cbxMieszkania.SelectedIndex.ToString());
             var selected = mieszkania[cbxMieszkania.SelectedIndex];
@@ -162,6 +173,13 @@ namespace Projekt_PBD
             {
                 MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
             }
+        }
+
+        private void btnBilans_Click(object sender, RoutedEventArgs e)
+        {
+            BilansOkno okno = new BilansOkno(wlasciciel);
+            this.Close();
+            okno.ShowDialog();
         }
     }
 }

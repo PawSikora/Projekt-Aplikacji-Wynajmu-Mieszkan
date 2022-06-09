@@ -1,0 +1,14 @@
+﻿<Window x:Class="Projekt_PBD.HistoriaOkno"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt_PBD"
+        mc:Ignorable="d"
+        Title="HistoriaOkno" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="btnZakoncz" Content="Wyjdź" HorizontalAlignment="Left" Margin="682,369,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="btnZakoncz_Click"/>
+        <ListBox x:Name="lbxTransakcje" d:ItemsSource="{d:SampleData ItemCount=5}" Width="250" Height="250" Margin="80,36,470,148"/>
+
+    </Grid>
+</Window>

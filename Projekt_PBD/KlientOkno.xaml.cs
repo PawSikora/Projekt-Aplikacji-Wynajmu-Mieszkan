@@ -58,5 +58,12 @@ namespace Projekt_PBD
                 MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
             }
         }
+
+        private void btnHistoriaWpłat_Click(object sender, RoutedEventArgs e)
+        {
+            HistoriaOkno okno = new HistoriaOkno(klient);
+            this.Close();
+            okno.ShowDialog();
+        }
     }
 }

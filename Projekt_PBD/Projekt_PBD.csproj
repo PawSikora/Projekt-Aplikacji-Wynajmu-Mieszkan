@@ -103,6 +103,9 @@
     <Compile Include="Bilan.cs">
       <DependentUpon>BazaWynajmu.tt</DependentUpon>
     </Compile>
+    <Compile Include="BilansOkno.xaml.cs">
+      <DependentUpon>BilansOkno.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DaneMieszkania.cs">
       <DependentUpon>BazaWynajmu.tt</DependentUpon>
     </Compile>
@@ -111,6 +114,9 @@
     </Compile>
     <Compile Include="DodajOferteOkno.xaml.cs">
       <DependentUpon>DodajOferteOkno.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HistoriaOkno.xaml.cs">
+      <DependentUpon>HistoriaOkno.xaml</DependentUpon>
     </Compile>
     <Compile Include="Klient.cs">
       <DependentUpon>BazaWynajmu.tt</DependentUpon>
@@ -136,11 +142,19 @@
     <Compile Include="WlascicielOkno.xaml.cs">
       <DependentUpon>WlascicielOkno.xaml</DependentUpon>
     </Compile>
+    <Page Include="BilansOkno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DodajMieszkanieOkno.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DodajOferteOkno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HistoriaOkno.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
