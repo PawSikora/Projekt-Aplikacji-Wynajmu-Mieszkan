@@ -34,7 +34,11 @@ namespace Projekt_PBD
         void WyświetlOferty()
         {
             lbxOfertyWynajmu.Items.Clear();
-            foreach (var o in oferty) { lbxOfertyWynajmu.Items.Add(o); }
+            foreach (var o in oferty)
+            {
+                if(o.aktualne == true)
+                    lbxOfertyWynajmu.Items.Add(o);
+            }
         }
         public OfertyWynajmuOkno(Klient klient) : this()
         {

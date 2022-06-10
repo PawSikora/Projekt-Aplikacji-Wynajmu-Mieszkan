@@ -27,6 +27,7 @@ namespace Projekt_PBD
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            Ukryj();
 
             int rok = 0;
             int pusty = 0;
@@ -41,6 +42,28 @@ namespace Projekt_PBD
             cbxLata.SelectedIndex = rok;
         }
 
+        private void Ukryj()
+        {
+            lblWynajem.Content = "Nie wynajmowane";
+            lblEmail.Visibility = Visibility.Hidden;
+            lblImieNazwisko.Visibility = Visibility.Hidden;
+            lblNrKonta.Visibility = Visibility.Hidden;
+            tbxEmail.Visibility = Visibility.Hidden;
+            tbxImieNazwisko.Visibility = Visibility.Hidden;
+            tbxNrKonta.Visibility = Visibility.Hidden;
+        }
+
+        private void Odkryj()
+        {
+            lblWynajem.Content = "Wynajmowane dla:";
+            lblEmail.Visibility = Visibility.Visible;
+            lblImieNazwisko.Visibility = Visibility.Visible;
+            lblNrKonta.Visibility = Visibility.Visible;
+            tbxEmail.Visibility = Visibility.Visible;
+            tbxImieNazwisko.Visibility = Visibility.Visible;
+            tbxNrKonta.Visibility = Visibility.Visible;
+        }
+
         private void WyswietlCBX()
         {
             mieszkania = context.DaneMieszkanias.Where(m => m.idW == wlasciciel.idW).Where(o => o.poczatekWynajmu != null).ToList();
@@ -51,6 +74,7 @@ namespace Projekt_PBD
         private void WyswietlOplaty()
         {
             lbxMieszkania.Items.Clear();
+            Ukryj();
             decimal? cenaZaMiesiac = null;
             decimal? kwota = null;
             DateTime data = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), cbxMiesiac.SelectedIndex+1, 1);
@@ -72,14 +96,22 @@ namespace Projekt_PBD
                     
                 var bilanse = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji == data).ToList();
 
+                //MessageBox.Show(bilanse.Count.ToString());
                 foreach (var b in bilanse)
                 {
                     if (b.dataTransakcji.Value.Year <= data.Year && b.dataTransakcji.Value.Month <= data.Month)
                     {
                         kwota = (decimal)b.kwota;
+
+                        Odkryj();
+
+                        tbxImieNazwisko.Text = $"{b.DaneMieszkania.Klient.imie} {b.DaneMieszkania.Klient.nazwisko}";
+                        tbxEmail.Text = $"{b.DaneMieszkania.Klient.email}";
+                        tbxNrKonta.Text = $"{b.DaneMieszkania.Klient.nrKonta}";
                         //MessageBox.Show("Dziala2");
                     }
                 }
+
 
                 var dataTransakcji = context.Bilans.Where(b => b.idM == mieszkanie.idM).Select(x => x.dataTransakcji)
                     .FirstOrDefault();
