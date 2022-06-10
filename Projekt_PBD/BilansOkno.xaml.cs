@@ -86,22 +86,17 @@ namespace Projekt_PBD
                 var oferty = context.Ofertas.Where(o => o.idM == mieszkanie.idM).ToList();
 
                 foreach (var o in oferty) { if (o.dataWystawienia <= data) cenaZaMiesiac = (Decimal)o.cenaZaMiesiac; }
-                    
-                var bilanse = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji.Value.Year == data.Year).Where(b => b.dataTransakcji.Value.Month == data.Month).ToList();
 
+                var bilans = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji.Value.Year == data.Year).Where(b => b.dataTransakcji.Value.Month == data.Month).FirstOrDefault();
 
-                foreach (var b in bilanse)
+                if (bilans != null)
                 {
-                    if (b.dataTransakcji.Value.Year <= data.Year && b.dataTransakcji.Value.Month <= data.Month)
-                    {
-                        kwota = (decimal)b.kwota;
+                    kwota = (decimal)bilans.kwota;
 
-                        Odkryj();
-
-                        tbxImieNazwisko.Text = $"{b.DaneMieszkania.Klient.imie} {b.DaneMieszkania.Klient.nazwisko}";
-                        tbxEmail.Text = $"{b.DaneMieszkania.Klient.email}";
-                        tbxNrKonta.Text = $"{b.DaneMieszkania.Klient.nrKonta}";
-                    }
+                    Odkryj();
+                    tbxImieNazwisko.Text = $"{bilans.DaneMieszkania.Klient.imie} {bilans.DaneMieszkania.Klient.nazwisko}";
+                    tbxEmail.Text = $"{bilans.DaneMieszkania.Klient.email}";
+                    tbxNrKonta.Text = $"{bilans.DaneMieszkania.Klient.nrKonta}";
                 }
 
 
