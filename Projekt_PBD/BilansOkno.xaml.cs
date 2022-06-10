@@ -79,24 +79,17 @@ namespace Projekt_PBD
             decimal? kwota = null;
             DateTime data = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), cbxMiesiac.SelectedIndex+1, 1);
             var mieszkanie = (DaneMieszkania)cbxMieszkania.SelectedItem;
-            //MessageBox.Show(mieszkanie.ToString());
+            
+
             if (mieszkanie != null)
             {
                 var oferty = context.Ofertas.Where(o => o.idM == mieszkanie.idM).ToList();
-                //MessageBox.Show(oferty.Count.ToString());
-                foreach (var o in oferty)
-                {
-                    //MessageBox.Show(o.dataWystawienia.ToString());
-                    if (o.dataWystawienia <= data)
-                    {
-                        cenaZaMiesiac = (Decimal)o.cenaZaMiesiac;
-                        //MessageBox.Show("Dziala1");
-                    }
-                }
-                    
-                var bilanse = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji == data).ToList();
 
-                //MessageBox.Show(bilanse.Count.ToString());
+                foreach (var o in oferty) { if (o.dataWystawienia <= data) cenaZaMiesiac = (Decimal)o.cenaZaMiesiac; }
+                    
+                var bilanse = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji.Value.Year == data.Year).Where(b => b.dataTransakcji.Value.Month == data.Month).ToList();
+
+
                 foreach (var b in bilanse)
                 {
                     if (b.dataTransakcji.Value.Year <= data.Year && b.dataTransakcji.Value.Month <= data.Month)
@@ -108,12 +101,11 @@ namespace Projekt_PBD
                         tbxImieNazwisko.Text = $"{b.DaneMieszkania.Klient.imie} {b.DaneMieszkania.Klient.nazwisko}";
                         tbxEmail.Text = $"{b.DaneMieszkania.Klient.email}";
                         tbxNrKonta.Text = $"{b.DaneMieszkania.Klient.nrKonta}";
-                        //MessageBox.Show("Dziala2");
                     }
                 }
 
 
-                var dataTransakcji = context.Bilans.Where(b => b.idM == mieszkanie.idM).Select(x => x.dataTransakcji)
+                var dataTransakcji = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji.Value.Year == data.Year).Where(b => b.dataTransakcji.Value.Month == data.Month).Select(x => x.dataTransakcji)
                     .FirstOrDefault();
                 if(dataTransakcji != null) lbxMieszkania.Items.Add(dataTransakcji);
                 if(cenaZaMiesiac != null) lbxMieszkania.Items.Add("Cena za miesiąc: " + cenaZaMiesiac);
@@ -144,23 +136,14 @@ namespace Projekt_PBD
         private void cbxMiesiac_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null && cbxMiesiac.SelectedValue != null)
-            {
-                DateTime data = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), cbxMiesiac.SelectedIndex + 1, 1);
-                //MessageBox.Show(data.ToString());
-                //WyswietlOplaty(); Nie można odpalać na chama, bo SelectionChanged uruchamia się przed konstruktorem???
                 WyswietlOplaty();
-            }
+            
         }
 
         private void cbxLata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null && cbxMiesiac.SelectedValue != null)
-            {
-                DateTime data = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), cbxMiesiac.SelectedIndex + 1, 1);
-                //MessageBox.Show(data.ToString());
-                //WyswietlOplaty(); Nie można odpalać na chama, bo SelectionChanged uruchamia się przed konstruktorem???
                 WyswietlOplaty();
-            }
         }
     }
 }
