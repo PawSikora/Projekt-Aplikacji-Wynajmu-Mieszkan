@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6770eb74da164b2aabdb80962100227b" Name="Diagram1" ZoomLevel="95">
+      <Diagram DiagramId="6770eb74da164b2aabdb80962100227b" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="Wynajem.Administrator" Width="1.5" PointX="1.875" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Wynajem.DaneMieszkania" Width="1.5" PointX="4.625" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Wynajem.Klient" Width="1.5" PointX="7.625" PointY="2.75" IsExpanded="true" />
@@ -19,6 +19,9 @@
         <AssociationConnector Association="Wynajem.FK__Oferta__idM__72C60C4A" />
         <AssociationConnector Association="Wynajem.FK__Log__idK__6FE99F9F" />
         <AssociationConnector Association="Wynajem.FK__Log__idW__70DDC3D8" />
+        <EntityTypeShape EntityType="Wynajem.Zainteresowani" Width="1.5" PointX="9.875" PointY="4.5" />
+        <AssociationConnector Association="Wynajem.FK__Zainteresow__idK__17036CC0" />
+        <AssociationConnector Association="Wynajem.FK__Zainteresow__idO__160F4887" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

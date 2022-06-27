@@ -34,17 +34,17 @@ namespace Projekt_PBD
         public Nullable<decimal> kosztaRemontow { get; set; }
         public Nullable<System.DateTime> poczatekWynajmu { get; set; }
         public Nullable<System.DateTime> koniecWynajmu { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Miasto} {Ulica} {nrBudynku}/{nrMieszkania}";
-        }
-
+    
         public virtual Klient Klient { get; set; }
         public virtual Wlasciciel Wlasciciel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bilan> Bilans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Oferta> Ofertas { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Miasto} {Ulica} {nrBudynku}/{nrMieszkania}";
+        }
     }
 }

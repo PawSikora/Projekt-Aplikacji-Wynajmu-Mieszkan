@@ -19,6 +19,7 @@ namespace Projekt_PBD
         {
             this.DaneMieszkanias = new HashSet<DaneMieszkania>();
             this.Logs = new HashSet<Log>();
+            this.Zainteresowanis = new HashSet<Zainteresowani>();
         }
     
         public int idK { get; set; }
@@ -31,5 +32,7 @@ namespace Projekt_PBD
         public virtual ICollection<DaneMieszkania> DaneMieszkanias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Log> Logs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zainteresowani> Zainteresowanis { get; set; }
     }
 }

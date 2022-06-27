@@ -14,6 +14,12 @@ namespace Projekt_PBD
     
     public partial class Oferta
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Oferta()
+        {
+            this.Zainteresowanis = new HashSet<Zainteresowani>();
+        }
+    
         public int idO { get; set; }
         public Nullable<System.DateTime> dataWystawienia { get; set; }
         public Nullable<int> idM { get; set; }
@@ -22,12 +28,14 @@ namespace Projekt_PBD
         public string wyposazenie { get; set; }
         public Nullable<double> metraz { get; set; }
         public Nullable<bool> aktualne { get; set; }
+    
+        public virtual DaneMieszkania DaneMieszkania { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zainteresowani> Zainteresowanis { get; set; }
 
         public override string ToString()
         {
-            return $"{DaneMieszkania.Miasto} {DaneMieszkania.Ulica} - {cenaZaMiesiac}z³";
+            return $"{DaneMieszkania.Miasto} {DaneMieszkania.Ulica} - {cenaZaMiesiac:C}";
         }
-
-        public virtual DaneMieszkania DaneMieszkania { get; set; }
     }
 }

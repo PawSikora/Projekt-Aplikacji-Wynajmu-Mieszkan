@@ -10,15 +10,19 @@
         <Button x:Name="btnZakoncz" Content="Wyjdź" HorizontalAlignment="Left" Margin="632,356,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnZakoncz_Click"/>
         <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="31,32,0,0" VerticalAlignment="Top" Width="260" SelectedIndex="0" Height="22" SelectionChanged="cbxMieszkania_SelectionChanged"/>
         <ListBox x:Name="lbxMieszkania" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,79,509,160"/>
-        <ComboBox x:Name="cbxMiesiac" HorizontalAlignment="Left" Margin="325,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="cbxMiesiac_SelectionChanged"/>
-        <ComboBox x:Name="cbxLata" HorizontalAlignment="Left" Margin="488,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="cbxLata_SelectionChanged"/>
-        <TextBox x:Name="tbxImieNazwisko" HorizontalAlignment="Left" Margin="442,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"/>
-        <TextBox x:Name="tbxEmail" HorizontalAlignment="Left" Margin="442,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"/>
-        <TextBox x:Name="tbxNrKonta" HorizontalAlignment="Left" Margin="442,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"/>
+        <ComboBox x:Name="cbxMiesiac" HorizontalAlignment="Left" Margin="325,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="cbxMiesiac_SelectionChanged" Height="22"/>
+        <ComboBox x:Name="cbxLata" HorizontalAlignment="Left" Margin="488,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="cbxLata_SelectionChanged" Height="22"/>
+        <TextBox x:Name="tbxImieNazwisko" HorizontalAlignment="Left" Margin="442,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True"/>
+        <TextBox x:Name="tbxEmail" HorizontalAlignment="Left" Margin="442,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True"/>
+        <TextBox x:Name="tbxNrKonta" HorizontalAlignment="Left" Margin="442,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True"/>
         <Label x:Name="lblWynajem" Content="Wynajmowane dla:" HorizontalAlignment="Left" Margin="325,87,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblImieNazwisko" Content="Imię nazwisko:" HorizontalAlignment="Left" Margin="348,118,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblEmail" Content="Adres e-mail:" HorizontalAlignment="Left" Margin="355,168,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblNrKonta" Content="Numer konta:" HorizontalAlignment="Left" Margin="354,220,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxOkres" HorizontalAlignment="Left" Margin="31,307,0,0" VerticalAlignment="Top" Width="130" Height="22" SelectedIndex="0" SelectionChanged="cbxOkres_SelectionChanged"/>
+        <Label Content="Okres bilansu:" HorizontalAlignment="Left" Margin="31,279,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxKwartał" HorizontalAlignment="Left" Margin="325,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Height="22" SelectionChanged="cbxKwartał_SelectionChanged"/>
+        <ComboBox x:Name="cbxPolRoku" HorizontalAlignment="Left" Margin="325,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Height="22" SelectionChanged="cbxPolRoku_SelectionChanged"/>
 
     </Grid>
 </Window>

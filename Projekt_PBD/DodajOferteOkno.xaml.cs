@@ -40,7 +40,7 @@ namespace Projekt_PBD
             if (tbxCenaZaMiesiac.Text.Length > 0 && tbxMetraz.Text.Length > 0 && tbxOpis.Text.Length > 0 &&
                 tbxWyposazenie.Text.Length > 0)
             {
-                if (context.Ofertas.Where(i => i.idM == mieszkanie.idM).FirstOrDefault()==null)
+                if (context.Ofertas.Where(i => i.idM == mieszkanie.idM).Where(o => o.DaneMieszkania.koniecWynajmu != null).FirstOrDefault()==null)
                 {
                     Oferta oferta = new Oferta();
                     oferta.idM = mieszkanie.idM;

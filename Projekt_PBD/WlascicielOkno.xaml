@@ -13,7 +13,7 @@
         <TextBox x:Name="tbxNazwisko" HorizontalAlignment="Left" Height="23" Margin="136,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="lblDaneMieszkania" Content="Dane mieszkania:" HorizontalAlignment="Left" Margin="18,109,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxDaneMieszkania" HorizontalAlignment="Left" Height="144" Margin="124,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" IsReadOnly="True"/>
-        <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="318,30,0,0" VerticalAlignment="Top" Width="229" SelectionChanged="cbxMieszkania_SelectionChanged" SelectedIndex="0" Height="22"/>
+        <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="318,30,0,0" VerticalAlignment="Top" Width="246" SelectionChanged="cbxMieszkania_SelectionChanged" SelectedIndex="0" Height="22"/>
         <Button x:Name="btnBilans" Content="Bilans" HorizontalAlignment="Left" Margin="30,292,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnBilans_Click"/>
         <Button x:Name="btnZakoncz" Content="Zakończ" HorizontalAlignment="Left" Margin="417,302,0,0" VerticalAlignment="Top" Width="80" Click="btnZakoncz_Click" Height="20"/>
         <Button x:Name="btnDodajeMieszkanie" Content="Dodaj Mieszkanie" HorizontalAlignment="Left" Margin="238,292,0,0" VerticalAlignment="Top" Click="btnDodajeMieszkanie_Click" Height="20" Width="100"/>
@@ -21,6 +21,7 @@
         <Button x:Name="btnUstawRemont" Content="Ustaw do remontu" HorizontalAlignment="Left" Margin="434,113,0,0" VerticalAlignment="Top" Height="20" Width="113" Click="btnUstawRemont_Click"/>
         <Button x:Name="btnUstawWynajęcie" Content="Ustaw do wynajęcia" HorizontalAlignment="Left" Margin="434,147,0,0" VerticalAlignment="Top" Height="20" Width="113" Click="btnUstawWynajęcie_Click"/>
         <Button x:Name="btnWypowiedzUmowe" Content="Wypowiedz umowę wynajmu" HorizontalAlignment="Left" Margin="263,88,0,0" VerticalAlignment="Top" Height="20" Width="166" Click="btnWypowiedzUmowe_Click"/>
+        <Button x:Name="btnPowiadomienia" Content="Powiadomienia" HorizontalAlignment="Left" Margin="474,60,0,0" VerticalAlignment="Top" Height="20" Width="90" Click="btnPowiadomienia_Click"/>
 
     </Grid>
 </Window>

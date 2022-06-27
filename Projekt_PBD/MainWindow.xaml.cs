@@ -68,7 +68,6 @@ namespace Projekt_PBD
             RejestracjaOkno okno = new RejestracjaOkno();
             this.Close();
             okno.ShowDialog();
-            
         }
     }
 }

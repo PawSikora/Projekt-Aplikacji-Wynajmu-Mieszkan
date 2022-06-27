@@ -29,6 +29,7 @@ namespace Projekt_PBD
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
             WyświetlOferty();
+            btnPowiadom.IsEnabled = false;
         }
 
         void WyświetlOferty()
@@ -58,6 +59,7 @@ namespace Projekt_PBD
             {
                 tbxDaneMieszkania.Text += $"Miasto: {oferta.DaneMieszkania.Miasto}\tUlica: {oferta.DaneMieszkania.Ulica} {oferta.DaneMieszkania.nrBudynku}/{oferta.DaneMieszkania.nrMieszkania} \n";
                 tbxDaneMieszkania.Text += $"Data wystawienia: {oferta.dataWystawienia:d} \nMetraż: {oferta.metraz}m2 \nCena za wynajęcie: {oferta.cenaZaMiesiac:C} \nWyposażenie: {oferta.wyposazenie}\nOpis: {oferta.opis}";
+                btnPowiadom.IsEnabled = true;
             }
             
         }
@@ -92,5 +94,18 @@ namespace Projekt_PBD
             tbxCenaMinimalna.Clear();
             tbxCenaMaksymalna.Clear();
         }
+
+        private void btnPowiadom_Click(object sender, RoutedEventArgs e)
+        {
+            Oferta oferta = (Oferta)lbxOfertyWynajmu.SelectedItem;
+            if (oferta != null)
+            {
+                DaneKontaktowe dane = new DaneKontaktowe(oferta, klient);
+                dane.ShowDialog();
+                if(dane.czyAnulowano == false) 
+                    btnPowiadom.IsEnabled = false;
+            }
+        }
+
     }
 }

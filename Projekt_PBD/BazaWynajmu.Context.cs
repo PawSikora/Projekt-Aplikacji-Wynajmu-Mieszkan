@@ -32,5 +32,6 @@ namespace Projekt_PBD
         public virtual DbSet<Bilan> Bilans { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<Oferta> Ofertas { get; set; }
+        public virtual DbSet<Zainteresowani> Zainteresowanis { get; set; }
     }
 }

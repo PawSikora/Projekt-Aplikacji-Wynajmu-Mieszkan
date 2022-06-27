@@ -22,6 +22,8 @@ namespace Projekt_PBD
         Baza_wynajmuEntities context = new Baza_wynajmuEntities();
         private Wlasciciel wlasciciel;
         private List<DaneMieszkania> mieszkania;
+        private int interesanci;
+
         //private int index = 0;
 
         public WlascicielOkno(Wlasciciel wlasciciel)
@@ -43,13 +45,14 @@ namespace Projekt_PBD
             {
                 if (x != null)
                 {
+                    interesanci = context.Zainteresowanis.Where(z => z.Oferta.idM == x.idM).Count();
                     string stan;
                     if (x.doWynajecia == true)
                         stan = "(Dostępne)";
                     else
                         stan = "(Niedostępne)";
 
-                    cbxMieszkania.Items.Add($"{x} {stan}");
+                    cbxMieszkania.Items.Add($"{x} {stan} [{interesanci}]");
                 }
             }
         }
@@ -76,6 +79,8 @@ namespace Projekt_PBD
                 tbxDaneMieszkania.AppendText($"{selected.kodPocztowy.ToString()} {selected.Miasto.ToString()}");
                 if(selected.doRemontu == true) tbxDaneMieszkania.AppendText($"\nMieszkanie w remoncie");
                 if (selected.doWynajecia == true) tbxDaneMieszkania.AppendText($"\nMieszkanie do wynajęcia");
+                if(cbxMieszkania.SelectedItem.ToString().Contains("[0]")) btnPowiadomienia.IsEnabled = false;
+                else btnPowiadomienia.IsEnabled = true;
             }
         }
         private void btnDodajeMieszkanie_Click(object sender, RoutedEventArgs e)
@@ -167,11 +172,19 @@ namespace Projekt_PBD
 
         private void btnWypowiedzUmowe_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult m = MessageBox.Show("Czy na pewno chcesz wypowiedzieć umowę?",
+            MessageBoxResult message = MessageBox.Show("Czy na pewno chcesz wypowiedzieć umowę?",
                 "Wypowiedzenie umowy", MessageBoxButton.YesNo);
-            if (m == MessageBoxResult.Yes)
+            if (message == MessageBoxResult.Yes)
             {
-                MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
+                var m = mieszkania[cbxMieszkania.SelectedIndex];
+                var mieszkanieDoWypowiedzenia = context.DaneMieszkanias
+                    .Where(mdw => mdw.idM == m.idM).FirstOrDefault();
+                if (mieszkanieDoWypowiedzenia != null)
+                {
+                    mieszkanieDoWypowiedzenia.koniecWynajmu = DateTime.Today.AddMonths(1);
+                    context.SaveChanges();
+                    MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
+                }
             }
         }
 
@@ -180,6 +193,12 @@ namespace Projekt_PBD
             BilansOkno okno = new BilansOkno(wlasciciel);
             this.Close();
             okno.ShowDialog();
+        }
+
+        private void btnPowiadomienia_Click(object sender, RoutedEventArgs e)
+        {
+            PowiadomieniaOkno powiadomienia = new PowiadomieniaOkno(wlasciciel, mieszkania[cbxMieszkania.SelectedIndex]);
+            powiadomienia.ShowDialog();
         }
     }
 }

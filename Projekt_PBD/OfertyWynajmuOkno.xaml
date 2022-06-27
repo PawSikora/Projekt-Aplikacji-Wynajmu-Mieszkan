@@ -25,6 +25,7 @@
         <Button x:Name="btnResetuj" Content="Reset filtrów" HorizontalAlignment="Left" Margin="128,274,0,0" VerticalAlignment="Top" Height="20" Width="95" Click="btnResetuj_Click"/>
         <TextBox x:Name="tbxDaneMieszkania" HorizontalAlignment="Left" Margin="472,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" Height="221" IsReadOnly="True"/>
         <Label Content="Szczegółowe dane mieszkania:" HorizontalAlignment="Left" Margin="472,6,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnPowiadom" Content="Powiadom właściciela" HorizontalAlignment="Left" Margin="484,279,0,0" VerticalAlignment="Top" Width="130" Height="20" Click="btnPowiadom_Click"/>
 
     </Grid>
 </Window>

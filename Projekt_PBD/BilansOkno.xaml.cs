@@ -29,6 +29,7 @@ namespace Projekt_PBD
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             Ukryj();
 
+            //Miesiące i lata
             int rok = 0;
             int pusty = 0;
             foreach (var m in DateTimeFormatInfo.CurrentInfo.MonthNames)
@@ -40,6 +41,30 @@ namespace Projekt_PBD
 
             cbxMiesiac.SelectedIndex = DateTime.Now.Month-1;
             cbxLata.SelectedIndex = rok;
+
+            //Okresy
+            cbxOkres.Items.Add("Miesiąc");
+            cbxOkres.Items.Add("Kwartał");
+            cbxOkres.Items.Add("Pół roku");
+            cbxOkres.Items.Add("Rok");
+
+            //Kwartały
+            cbxKwartał.Items.Add("Kwartał I");
+            cbxKwartał.Items.Add("Kwartał II");
+            cbxKwartał.Items.Add("Kwartał III");
+            cbxKwartał.Items.Add("Kwartał IV");
+            cbxKwartał.Visibility = Visibility.Hidden;
+
+            //Półroku
+            cbxPolRoku.Items.Add("I połowa");
+            cbxPolRoku.Items.Add("II połowa");
+            cbxPolRoku.Visibility = Visibility.Hidden;
+        }
+
+        public BilansOkno(Wlasciciel wlascicielM) : this()
+        {
+            wlasciciel = wlascicielM;
+            WyswietlCBX();
         }
 
         private void Ukryj()
@@ -110,12 +135,6 @@ namespace Projekt_PBD
             }
         }
 
-        public BilansOkno(Wlasciciel wlascicielM) : this()
-        {
-            wlasciciel = wlascicielM;
-            WyswietlCBX();
-        }
-
         private void btnZakoncz_Click(object sender, RoutedEventArgs e)
         {
             new WlascicielOkno(wlasciciel).Show();
@@ -137,8 +156,113 @@ namespace Projekt_PBD
 
         private void cbxLata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null && cbxMiesiac.SelectedValue != null)
-                WyswietlOplaty();
+            if (cbxMiesiac.Visibility == Visibility.Visible)
+            {
+                if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null && cbxMiesiac.SelectedValue != null)
+                    WyswietlOplaty();
+            }
+            else if (cbxMiesiac.Visibility == Visibility.Hidden && cbxKwartał.Visibility == Visibility.Hidden && cbxPolRoku.Visibility == Visibility.Hidden)
+            {
+                DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
+                DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
+                decimal? wynik = context.Bilans.Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon)
+                    .Sum(s => s.kwota);
+                MessageBox.Show($"{wynik}");
+                lbxMieszkania.Items.Clear();
+                lbxMieszkania.Items.Add($"Saldo za rok: {wynik}");
+            }
+        }
+
+        private void cbxOkres_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show($"{cbxOkres.SelectedIndex}");
+
+            switch (cbxOkres.SelectedIndex)
+            {
+                case 0:
+                    cbxMiesiac.Visibility = Visibility.Visible;
+                    cbxKwartał.Visibility = Visibility.Hidden;
+                    cbxPolRoku.Visibility = Visibility.Hidden;
+                    break;
+
+                case 1:
+                    cbxMiesiac.Visibility = Visibility.Hidden;
+                    cbxKwartał.Visibility = Visibility.Visible;
+                    cbxPolRoku.Visibility = Visibility.Hidden;
+                    break;
+
+                case 2:
+                    cbxMiesiac.Visibility = Visibility.Hidden;
+                    cbxKwartał.Visibility = Visibility.Hidden;
+                    cbxPolRoku.Visibility = Visibility.Visible;
+                    break;
+
+                case 3:
+                    cbxMiesiac.Visibility = Visibility.Hidden;
+                    cbxKwartał.Visibility = Visibility.Hidden;
+                    cbxPolRoku.Visibility = Visibility.Hidden;
+                    break;
+            }
+        }
+
+        private void cbxKwartał_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
+            DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
+            switch (cbxKwartał.SelectedIndex)
+            {
+                case 0:
+                    kon = pocz.AddMonths(3);
+                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
+                    break;
+
+                case 1:
+                    pocz = pocz.AddMonths(3);
+                    kon = pocz.AddMonths(3);
+                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
+                    break;
+
+                case 2:
+                    pocz = pocz.AddMonths(6);
+                    kon = pocz.AddMonths(3);
+                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
+                    break;
+
+                case 3:
+                    pocz = pocz.AddMonths(9);
+                    //kon = pocz.AddMonths(2);
+                    kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
+                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
+                    break;
+            }
+
+            decimal? wynik = context.Bilans.Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon)
+                .Sum(s => s.kwota);
+            MessageBox.Show($"{wynik}");
+            lbxMieszkania.Items.Clear();
+            lbxMieszkania.Items.Add($"Saldo za {cbxKwartał.SelectedValue.ToString()}: {wynik}");
+        }
+
+        private void cbxPolRoku_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
+            DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
+            switch (cbxPolRoku.SelectedIndex)
+            {
+                case 0:
+                    kon = pocz.AddMonths(6);
+                    break;
+
+                case 1:
+                    pocz = pocz.AddMonths(6);
+                    kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
+                    break;
+            }
+            decimal? wynik = context.Bilans.Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon)
+                .Sum(s => s.kwota);
+            MessageBox.Show($"{wynik}");
+            lbxMieszkania.Items.Clear();
+            lbxMieszkania.Items.Add($"Saldo za {cbxPolRoku.SelectedValue.ToString()} pół roku: {wynik}");
         }
     }
 }

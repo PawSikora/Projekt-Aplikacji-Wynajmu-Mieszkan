@@ -20,6 +20,7 @@ namespace Projekt_PBD
     ///
     public partial class RejestracjaOkno : Window
     {
+        Baza_wynajmuEntities context = new Baza_wynajmuEntities();
         public RejestracjaOkno()
         {
             InitializeComponent();
@@ -31,7 +32,32 @@ namespace Projekt_PBD
             this.Close();
         }
 
-        Baza_wynajmuEntities context=new Baza_wynajmuEntities();
+        public String ByteArrayToHexString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+            {
+                hex.AppendFormat("{0:x2}", b);
+            }
+            return hex.ToString();
+        }
+        public String CreateSalt(int size)
+        {
+            var rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            var buff = new byte[size];
+            rng.GetBytes(buff);
+            return Convert.ToBase64String(buff);
+        }
+
+        public String GenerateSHA256Hash(String input, String salt)
+        {
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input + salt);
+            System.Security.Cryptography.SHA256Managed sha256hashstring = new System.Security.Cryptography.SHA256Managed();
+            byte[] hash = sha256hashstring.ComputeHash(bytes);
+
+            return ByteArrayToHexString(hash);
+        }
+
         private void btnUwtorzKonto_Click(object sender, RoutedEventArgs e)
         {
             if (pwbHaslo.Password == pwbPowtorzHaslo.Password && tbxEmail.Text.Length > 0 && tbxEmail.Text.Contains("@") &&
@@ -80,5 +106,12 @@ namespace Projekt_PBD
             Zamknij();
         }
 
+        private void btnHash_Click(object sender, RoutedEventArgs e)
+        {
+            String salt = CreateSalt(10);
+            String hashedpassword = GenerateSHA256Hash(tbxTest1.Text, salt);
+
+            tbxTest2.Text = $"Salt: {salt}\n\nHashedpassword: {hashedpassword.ToString()}";
+        }
     }
 }

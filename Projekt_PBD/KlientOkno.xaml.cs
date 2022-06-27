@@ -21,6 +21,7 @@ namespace Projekt_PBD
     public partial class KlientOkno : Window
     {
         private Klient klient;
+        private Baza_wynajmuEntities context = new Baza_wynajmuEntities();
         public KlientOkno(Klient klient)
         {
             InitializeComponent();
@@ -55,7 +56,14 @@ namespace Projekt_PBD
                 "Wypowiedzenie umowy", MessageBoxButton.YesNo);
             if (m == MessageBoxResult.Yes)
             {
-                MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
+                var mieszkanieDoWypowiedzenia = context.DaneMieszkanias
+                    .Where(mdw => mdw.idK == klient.idK).FirstOrDefault();
+                if (mieszkanieDoWypowiedzenia != null)
+                {
+                    mieszkanieDoWypowiedzenia.koniecWynajmu = DateTime.Today.AddMonths(1);
+                    context.SaveChanges();
+                    MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
+                }
             }
         }
 
