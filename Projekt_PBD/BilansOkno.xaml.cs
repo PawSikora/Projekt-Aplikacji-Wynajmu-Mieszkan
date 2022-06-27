@@ -124,7 +124,6 @@ namespace Projekt_PBD
                     tbxNrKonta.Text = $"{bilans.DaneMieszkania.Klient.nrKonta}";
                 }
 
-
                 var dataTransakcji = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji.Value.Year == data.Year).Where(b => b.dataTransakcji.Value.Month == data.Month).Select(x => x.dataTransakcji)
                     .FirstOrDefault();
                 if(dataTransakcji != null) lbxMieszkania.Items.Add(dataTransakcji);
@@ -154,6 +153,20 @@ namespace Projekt_PBD
             
         }
 
+        private void ObliczRok()
+        {
+            DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
+            DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
+
+            if (wlasciciel != null)
+            {
+                decimal? wynik = context.Bilans.Where(b => b.DaneMieszkania.idW == wlasciciel.idW).Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon).Sum(s => s.kwota);
+
+                lbxMieszkania.Items.Clear();
+                lbxMieszkania.Items.Add($"Saldo za rok: {wynik}");
+            }
+        }
+
         private void cbxLata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbxMiesiac.Visibility == Visibility.Visible)
@@ -161,51 +174,85 @@ namespace Projekt_PBD
                 if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null && cbxMiesiac.SelectedValue != null)
                     WyswietlOplaty();
             }
-            else if (cbxMiesiac.Visibility == Visibility.Hidden && cbxKwartał.Visibility == Visibility.Hidden && cbxPolRoku.Visibility == Visibility.Hidden)
+            else 
             {
-                DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
-                DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
-                decimal? wynik = context.Bilans.Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon)
-                    .Sum(s => s.kwota);
-                MessageBox.Show($"{wynik}");
-                lbxMieszkania.Items.Clear();
-                lbxMieszkania.Items.Add($"Saldo za rok: {wynik}");
+                switch (cbxOkres.SelectedIndex)
+                {
+                    case 0:
+                        if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null &&
+                            cbxMiesiac.SelectedValue != null)
+                        {
+                            WyswietlOplaty();
+                            Odkryj();
+                            lblWynajem.Visibility = Visibility.Visible;
+                        } 
+                        break;
+                    case 1:
+                        ObliczKwartal();
+                        Ukryj();
+                        lblWynajem.Visibility = Visibility.Hidden;
+                        break;
+                    case 2:
+                        ObliczPolRoku();
+                        Ukryj();
+                        lblWynajem.Visibility = Visibility.Hidden;
+                        break;
+                    case 3:
+                        ObliczRok();
+                        Ukryj();
+                        lblWynajem.Visibility = Visibility.Hidden;
+                        break;
+                }
             }
         }
 
         private void cbxOkres_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show($"{cbxOkres.SelectedIndex}");
-
             switch (cbxOkres.SelectedIndex)
             {
                 case 0:
                     cbxMiesiac.Visibility = Visibility.Visible;
                     cbxKwartał.Visibility = Visibility.Hidden;
                     cbxPolRoku.Visibility = Visibility.Hidden;
+                    if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null &&
+                        cbxMiesiac.SelectedValue != null)
+                    {
+                        WyswietlOplaty();
+                        Odkryj();
+                        lblWynajem.Visibility = Visibility.Visible;
+                    } 
                     break;
 
                 case 1:
                     cbxMiesiac.Visibility = Visibility.Hidden;
                     cbxKwartał.Visibility = Visibility.Visible;
                     cbxPolRoku.Visibility = Visibility.Hidden;
+                    ObliczKwartal();
+                    Ukryj();
+                    lblWynajem.Visibility = Visibility.Hidden;
                     break;
 
                 case 2:
                     cbxMiesiac.Visibility = Visibility.Hidden;
                     cbxKwartał.Visibility = Visibility.Hidden;
                     cbxPolRoku.Visibility = Visibility.Visible;
+                    ObliczPolRoku();
+                    Ukryj();
+                    lblWynajem.Visibility = Visibility.Hidden;
                     break;
 
                 case 3:
                     cbxMiesiac.Visibility = Visibility.Hidden;
                     cbxKwartał.Visibility = Visibility.Hidden;
                     cbxPolRoku.Visibility = Visibility.Hidden;
+                    ObliczRok();
+                    Ukryj();
+                    lblWynajem.Visibility = Visibility.Hidden;
                     break;
             }
         }
 
-        private void cbxKwartał_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ObliczKwartal()
         {
             DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
             DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
@@ -236,14 +283,20 @@ namespace Projekt_PBD
                     break;
             }
 
-            decimal? wynik = context.Bilans.Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon)
-                .Sum(s => s.kwota);
-            MessageBox.Show($"{wynik}");
-            lbxMieszkania.Items.Clear();
-            lbxMieszkania.Items.Add($"Saldo za {cbxKwartał.SelectedValue.ToString()}: {wynik}");
+            if (wlasciciel != null)
+            {
+                decimal? wynik = context.Bilans.Where(b => b.DaneMieszkania.idW == wlasciciel.idW).Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon).Sum(s => s.kwota);
+                lbxMieszkania.Items.Clear();
+                lbxMieszkania.Items.Add($"Saldo za {cbxKwartał.SelectedValue.ToString()}: {wynik}");
+            }
         }
 
-        private void cbxPolRoku_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbxKwartał_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ObliczKwartal();
+        }
+
+        private void ObliczPolRoku()
         {
             DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
             DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
@@ -258,11 +311,18 @@ namespace Projekt_PBD
                     kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
                     break;
             }
-            decimal? wynik = context.Bilans.Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon)
-                .Sum(s => s.kwota);
-            MessageBox.Show($"{wynik}");
-            lbxMieszkania.Items.Clear();
-            lbxMieszkania.Items.Add($"Saldo za {cbxPolRoku.SelectedValue.ToString()} pół roku: {wynik}");
+            
+            if (wlasciciel != null)
+            {
+                decimal? wynik = context.Bilans.Where(b => b.DaneMieszkania.idW == wlasciciel.idW).Where(b => b.dataTransakcji >= pocz && b.dataTransakcji < kon).Sum(s => s.kwota);
+
+                lbxMieszkania.Items.Clear();
+                lbxMieszkania.Items.Add($"Saldo za {cbxPolRoku.SelectedValue.ToString()} pół roku: {wynik}");
+            }
+        }
+        private void cbxPolRoku_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ObliczPolRoku();
         }
     }
 }

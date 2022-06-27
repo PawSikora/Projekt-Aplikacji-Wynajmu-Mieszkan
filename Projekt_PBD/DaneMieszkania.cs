@@ -41,10 +41,5 @@ namespace Projekt_PBD
         public virtual ICollection<Bilan> Bilans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Oferta> Ofertas { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Miasto} {Ulica} {nrBudynku}/{nrMieszkania}";
-        }
     }
 }

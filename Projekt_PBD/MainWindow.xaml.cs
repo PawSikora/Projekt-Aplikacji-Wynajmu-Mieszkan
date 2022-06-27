@@ -31,7 +31,6 @@ namespace Projekt_PBD
 
         private void btnZaloguj_Click(object sender, RoutedEventArgs e)
         {
-
             Log user = Validate(txtLogin.Text,txtHaslo.Password);
             if (user != null)
             {
@@ -60,7 +59,10 @@ namespace Projekt_PBD
 
         public Log Validate(string email, string haslo)
         {
-            return context.Logs.Where(m => m.email == email).Where(n => n.haslo == haslo).FirstOrDefault();
+            var user = context.Logs.Where(l => l.email == email).FirstOrDefault();
+            String hashpass = RejestracjaOkno.GenerateSHA256Hash(haslo, user.salt);
+            //return context.Logs.Where(m => m.email == email).Where(n => n.haslo == haslo).FirstOrDefault();
+            return context.Logs.Where(h => h.haslo == hashpass).FirstOrDefault();
         }
 
         private void btnZarejestruj_Click(object sender, RoutedEventArgs e)

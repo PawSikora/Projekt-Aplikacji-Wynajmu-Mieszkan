@@ -32,10 +32,5 @@ namespace Projekt_PBD
         public virtual DaneMieszkania DaneMieszkania { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zainteresowani> Zainteresowanis { get; set; }
-
-        public override string ToString()
-        {
-            return $"{DaneMieszkania.Miasto} {DaneMieszkania.Ulica} - {cenaZaMiesiac:C}";
-        }
     }
 }

@@ -34,8 +34,14 @@ namespace Projekt_PBD
             { 
                 tbxDaneMieszkania.AppendText($"ul. {mieszkanieKlienta.Ulica} {mieszkanieKlienta.nrBudynku}/{mieszkanieKlienta.nrMieszkania}\n");
                 tbxDaneMieszkania.AppendText($"{mieszkanieKlienta.kodPocztowy} {mieszkanieKlienta.Miasto}");
+                btnHistoriaWpłat.IsEnabled = true;
             }
-            if (klient.DaneMieszkanias.Where(k => k.idK == klient.idK).FirstOrDefault() == null) btnWypowiedzUmowe.IsEnabled = false;
+
+            if (klient.DaneMieszkanias.Where(k => k.idK == klient.idK).FirstOrDefault() == null)
+            {
+                btnWypowiedzUmowe.IsEnabled = false;
+                btnHistoriaWpłat.IsEnabled = false;
+            }
         }
 
 

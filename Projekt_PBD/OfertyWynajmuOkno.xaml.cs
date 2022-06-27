@@ -63,27 +63,6 @@ namespace Projekt_PBD
             }
             
         }
-
-        private void btnFiltruj_Click(object sender, RoutedEventArgs e)
-        {
-            if (tbxMiasto.Text.Length > 0) oferty = context.Ofertas.Where(m => m.DaneMieszkania.Miasto.StartsWith(tbxMiasto.Text)).ToList();
-            if (tbxUlica.Text.Length > 0) oferty = oferty.Where(u => u.DaneMieszkania.Ulica.StartsWith(tbxUlica.Text)).ToList();
-            if (tbxCenaMinimalna.Text.Length > 0)
-            {
-                var cenaMinimalna = Convert.ToDecimal(tbxCenaMinimalna.Text);
-                oferty = oferty.Where(cm => cm.cenaZaMiesiac >= cenaMinimalna).ToList();
-            }
-            if (tbxCenaMaksymalna.Text.Length > 0)
-            {
-                var cenaMaksymalna = Convert.ToDecimal(tbxCenaMaksymalna.Text);
-                oferty = oferty.Where(cm => cm.cenaZaMiesiac <= cenaMaksymalna).ToList();
-            }
-
-            if (rdbMalejaco.IsChecked == true) oferty = oferty.OrderByDescending(c => c.cenaZaMiesiac).ToList();
-            if (rdbRosnaco.IsChecked == true) oferty = oferty.OrderBy(c => c.cenaZaMiesiac).ToList();
-            WyświetlOferty();
-        }
-
         private void btnResetuj_Click(object sender, RoutedEventArgs e)
         {
             oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
@@ -107,5 +86,85 @@ namespace Projekt_PBD
             }
         }
 
+        private void Filtruj()
+        {
+            if (tbxMiasto.Text.Length > 0) oferty = context.Ofertas.Where(m => m.DaneMieszkania.Miasto.StartsWith(tbxMiasto.Text)).ToList();
+            if (tbxUlica.Text.Length > 0) oferty = oferty.Where(u => u.DaneMieszkania.Ulica.StartsWith(tbxUlica.Text)).ToList();
+            if (tbxCenaMinimalna.Text.Length > 0)
+            {
+                var cenaMinimalna = Convert.ToDecimal(tbxCenaMinimalna.Text);
+                oferty = oferty.Where(cm => cm.cenaZaMiesiac >= cenaMinimalna).ToList();
+            }
+            if (tbxCenaMaksymalna.Text.Length > 0)
+            {
+                var cenaMaksymalna = Convert.ToDecimal(tbxCenaMaksymalna.Text);
+                oferty = oferty.Where(cm => cm.cenaZaMiesiac <= cenaMaksymalna).ToList();
+            }
+
+            if (rdbMalejaco.IsChecked == true) oferty = oferty.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+            if (rdbRosnaco.IsChecked == true) oferty = oferty.OrderBy(c => c.cenaZaMiesiac).ToList();
+            WyświetlOferty();
+        }
+
+        private void Reset()
+        {
+            oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+            WyświetlOferty();
+            tbxDaneMieszkania.Clear();
+            tbxMiasto.Clear();
+            tbxUlica.Clear();
+            tbxCenaMinimalna.Clear();
+            tbxCenaMaksymalna.Clear();
+        }
+
+        private void tbxMiasto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbxMiasto.Text.Length == 0)
+            {
+                oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+                WyświetlOferty();
+            } 
+            Filtruj();
+        }
+
+        private void tbxUlica_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbxUlica.Text.Length == 0)
+            {
+                oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+                WyświetlOferty();
+            }
+            Filtruj();
+        }
+
+        private void tbxCenaMinimalna_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbxCenaMinimalna.Text.Length == 0)
+            {
+                oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+                WyświetlOferty();
+            }
+            Filtruj();
+        }
+
+        private void tbxCenaMaksymalna_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbxCenaMaksymalna.Text.Length > 0)
+            {
+                oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+                WyświetlOferty();
+            }
+            Filtruj();
+        }
+
+        private void rdbMalejaco_Checked(object sender, RoutedEventArgs e)
+        {
+            Filtruj();
+        }
+
+        private void rdbRosnaco_Checked(object sender, RoutedEventArgs e)
+        {
+            Filtruj();
+        }
     }
 }

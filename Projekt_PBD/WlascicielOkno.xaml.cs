@@ -22,7 +22,6 @@ namespace Projekt_PBD
         Baza_wynajmuEntities context = new Baza_wynajmuEntities();
         private Wlasciciel wlasciciel;
         private List<DaneMieszkania> mieszkania;
-        private int interesanci;
 
         //private int index = 0;
 
@@ -41,18 +40,27 @@ namespace Projekt_PBD
         {
             cbxMieszkania.Items.Clear();
             mieszkania = context.DaneMieszkanias.Where(m => m.idW == wlasciciel.idW).ToList();
+            var listaMieszkań = context.DaneMieszkanias.ToList();
             foreach (var x in mieszkania)
             {
                 if (x != null)
                 {
-                    interesanci = context.Zainteresowanis.Where(z => z.Oferta.idM == x.idM).Count();
+                    int interesanci = 0;
+
+                    var zainteresowani = context.Zainteresowanis.Where(z => z.Oferta.idM == x.idM).ToList();
+                    foreach (var z in zainteresowani)
+                    {
+                        if (context.DaneMieszkanias.Where(m => m.idK == z.idK).FirstOrDefault() == null)
+                            interesanci++;
+                    }
+
                     string stan;
                     if (x.doWynajecia == true)
                         stan = "(Dostępne)";
                     else
                         stan = "(Niedostępne)";
 
-                    cbxMieszkania.Items.Add($"{x} {stan} [{interesanci}]");
+                    cbxMieszkania.Items.Add($"{x} {stan} [{interesanci}] ");
                 }
             }
         }
@@ -79,8 +87,10 @@ namespace Projekt_PBD
                 tbxDaneMieszkania.AppendText($"{selected.kodPocztowy.ToString()} {selected.Miasto.ToString()}");
                 if(selected.doRemontu == true) tbxDaneMieszkania.AppendText($"\nMieszkanie w remoncie");
                 if (selected.doWynajecia == true) tbxDaneMieszkania.AppendText($"\nMieszkanie do wynajęcia");
-                if(cbxMieszkania.SelectedItem.ToString().Contains("[0]")) btnPowiadomienia.IsEnabled = false;
-                else btnPowiadomienia.IsEnabled = true;
+                if(cbxMieszkania.SelectedItem.ToString().Contains("[0]") || selected.doWynajecia == false) 
+                    btnPowiadomienia.IsEnabled = false;
+                else 
+                    btnPowiadomienia.IsEnabled = true;
             }
         }
         private void btnDodajeMieszkanie_Click(object sender, RoutedEventArgs e)

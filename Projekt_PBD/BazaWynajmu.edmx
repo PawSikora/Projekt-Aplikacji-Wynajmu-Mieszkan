@@ -61,6 +61,7 @@
           <Property Name="idK" Type="int" />
           <Property Name="idW" Type="int" />
           <Property Name="idA" Type="int" />
+          <Property Name="salt" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Oferta">
           <Key>
@@ -402,6 +403,7 @@
           <NavigationProperty Name="Administrator" Relationship="Wynajem.FK__Log__idA__71D1E811" FromRole="Log" ToRole="Administrator" />
           <NavigationProperty Name="Klient" Relationship="Wynajem.FK__Log__idK__6FE99F9F" FromRole="Log" ToRole="Klient" />
           <NavigationProperty Name="Wlasciciel" Relationship="Wynajem.FK__Log__idW__70DDC3D8" FromRole="Log" ToRole="Wlasciciel" />
+          <Property Name="salt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Oferta">
           <Key>
@@ -583,6 +585,7 @@
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="Wynajem.Log">
               <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="salt" ColumnName="salt" />
                 <ScalarProperty Name="idA" ColumnName="idA" />
                 <ScalarProperty Name="idW" ColumnName="idW" />
                 <ScalarProperty Name="idK" ColumnName="idK" />

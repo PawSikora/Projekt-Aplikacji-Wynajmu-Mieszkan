@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_PBD"
         mc:Ignorable="d"
-        Title="BilansOkno" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="btnZakoncz" Content="Wyjdź" HorizontalAlignment="Left" Margin="632,356,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnZakoncz_Click"/>
+        Title="BilansOkno" Height="398" Width="700">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Button x:Name="btnZakoncz" Content="Wyjdź" HorizontalAlignment="Left" Margin="569,318,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnZakoncz_Click"/>
         <ComboBox x:Name="cbxMieszkania" HorizontalAlignment="Left" Margin="31,32,0,0" VerticalAlignment="Top" Width="260" SelectedIndex="0" Height="22" SelectionChanged="cbxMieszkania_SelectionChanged"/>
-        <ListBox x:Name="lbxMieszkania" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,79,509,160"/>
+        <ListBox x:Name="lbxMieszkania" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,79,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="195" Width="260"/>
         <ComboBox x:Name="cbxMiesiac" HorizontalAlignment="Left" Margin="325,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="cbxMiesiac_SelectionChanged" Height="22"/>
         <ComboBox x:Name="cbxLata" HorizontalAlignment="Left" Margin="488,32,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="cbxLata_SelectionChanged" Height="22"/>
         <TextBox x:Name="tbxImieNazwisko" HorizontalAlignment="Left" Margin="442,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True"/>

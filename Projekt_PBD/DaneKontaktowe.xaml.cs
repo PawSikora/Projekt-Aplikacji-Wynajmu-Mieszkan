@@ -58,10 +58,5 @@ namespace Projekt_PBD
             czyAnulowano = true;
             Close();
         }
-
-        private void btnTest_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
     }
 }

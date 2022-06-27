@@ -21,10 +21,5 @@ namespace Projekt_PBD
     
         public virtual Klient Klient { get; set; }
         public virtual Oferta Oferta { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Klient.imie} {Klient.nazwisko}";
-        }
     }
 }

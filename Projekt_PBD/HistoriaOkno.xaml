@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Projekt_PBD"
         mc:Ignorable="d"
         Title="HistoriaOkno" Height="470" Width="800">
-    <Grid>
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Width="800" Height="460">
         <Button x:Name="btnZakoncz" Content="Wyjdź" HorizontalAlignment="Left" Margin="682,369,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="btnZakoncz_Click"/>
-        <ListBox x:Name="lbxTransakcje" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="79,69,431,225" Width="290" Height="160"/>
+        <ListBox x:Name="lbxTransakcje" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="79,69,431,225" Width="290" Height="160" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Początek wynajmu:" HorizontalAlignment="Left" Margin="404,26,0,0" VerticalAlignment="Top" Height="28" Width="115"/>
         <Label Content="Koniec wynajmu:" HorizontalAlignment="Left" Margin="404,68,0,0" VerticalAlignment="Top" Height="28" Width="108"/>
         <TextBox x:Name="tbxPoczatekWynajmu" HorizontalAlignment="Left" Margin="524,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True"/>
@@ -22,7 +22,7 @@
         <Label Content="Imię nazwisko:" HorizontalAlignment="Left" Margin="513,172,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxDaneMieszkania" HorizontalAlignment="Left" Margin="79,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" Height="26" IsReadOnly="True"/>
         <Button x:Name="btnWplata" Content="Dokonaj wpłaty" HorizontalAlignment="Left" Margin="386,400,0,0" VerticalAlignment="Top" Width="90" Height="20" Click="btnWplata_Click"/>
-        <ListBox x:Name="lbxZalegle" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="79,260,431,34" Width="290" Height="160" SelectionChanged="lbxZalegle_SelectionChanged"/>
+        <ListBox x:Name="lbxZalegle" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="79,260,431,34" Width="290" Height="160" SelectionChanged="lbxZalegle_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Label Content="Dokonane wpłaty:" HorizontalAlignment="Left" Margin="21,45,0,0" VerticalAlignment="Top"/>
         <Label Content="Zaległe opłaty:" HorizontalAlignment="Left" Margin="30,233,0,0" VerticalAlignment="Top"/>
 

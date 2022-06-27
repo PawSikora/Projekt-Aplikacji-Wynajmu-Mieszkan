@@ -7,25 +7,22 @@
         mc:Ignorable="d"
         Title="RejestracjaOkno" Height="395" Width="357">
     <Grid>
-        <TextBox x:Name="tbxImie" HorizontalAlignment="Left" Margin="26,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
-        <TextBox x:Name="tbxNazwisko" HorizontalAlignment="Left" Margin="26,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
-        <TextBox x:Name="tbxEmail" HorizontalAlignment="Left" Margin="26,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <TextBox x:Name="tbxImie" HorizontalAlignment="Left" Margin="26,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Height="20"/>
+        <TextBox x:Name="tbxNazwisko" HorizontalAlignment="Left" Margin="26,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Height="20"/>
+        <TextBox x:Name="tbxEmail" HorizontalAlignment="Left" Margin="26,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Height="20"/>
         <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="26,70,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="26,131,0,0" VerticalAlignment="Top" Width="98" Height="24"/>
         <Label Content="Haslo" HorizontalAlignment="Left" Margin="25,233,0,0" VerticalAlignment="Top" Height="26" Width="40"/>
         <Label Content="Powtórz hasło" HorizontalAlignment="Left" Margin="25,289,0,0" VerticalAlignment="Top" Height="26" Width="84"/>
-        <TextBox x:Name="tbxNrKonta" HorizontalAlignment="Left" Margin="26,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <TextBox x:Name="tbxNrKonta" HorizontalAlignment="Left" Margin="26,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Height="20"/>
         <Label Content="Numer konta" HorizontalAlignment="Left" Margin="24,188,0,0" VerticalAlignment="Top" Height="26" Width="80"/>
-        <PasswordBox x:Name="pwbHaslo" HorizontalAlignment="Left" Margin="25,264,0,0" VerticalAlignment="Top" Width="120" Height="20"/>
-        <PasswordBox x:Name="pwbPowtorzHaslo" HorizontalAlignment="Left" Margin="25,322,0,0" VerticalAlignment="Top" Width="120" Height="20"/>
-        <Button x:Name="btnUwtorzKonto" Content="Utwórz konto" HorizontalAlignment="Left" Margin="163,320,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="btnUwtorzKonto_Click"/>
-        <RadioButton x:Name="rdbCzyKlient" Content="Klient" HorizontalAlignment="Left" Margin="168,40,0,0" VerticalAlignment="Top" Height="18" Width="70"/>
-        <RadioButton x:Name="rdbCzyWlasciciel" Content="Właściciel" HorizontalAlignment="Left" Margin="238,40,0,0" VerticalAlignment="Top" Height="15" Width="74"/>
+        <PasswordBox x:Name="pwbHaslo" HorizontalAlignment="Left" Margin="25,264,0,0" VerticalAlignment="Top" Width="132" Height="20"/>
+        <PasswordBox x:Name="pwbPowtorzHaslo" HorizontalAlignment="Left" Margin="25,322,0,0" VerticalAlignment="Top" Width="132" Height="20"/>
+        <Button x:Name="btnUwtorzKonto" Content="Utwórz konto" HorizontalAlignment="Left" Margin="172,320,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="btnUwtorzKonto_Click"/>
+        <RadioButton x:Name="rdbCzyKlient" Content="Klient" HorizontalAlignment="Left" Margin="179,40,0,0" VerticalAlignment="Top" Height="18" Width="70"/>
+        <RadioButton x:Name="rdbCzyWlasciciel" Content="Właściciel" HorizontalAlignment="Left" Margin="249,40,0,0" VerticalAlignment="Top" Height="15" Width="74"/>
         <Label Content="Imię" HorizontalAlignment="Left" Margin="26,10,0,0" VerticalAlignment="Top" Height="26" Width="33"/>
-        <Button x:Name="btnAnuluj" Content="Anuluj" HorizontalAlignment="Left" Margin="257,320,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="btnAnuluj_Click"/>
-        <TextBox x:Name="tbxTest1" HorizontalAlignment="Left" Margin="217,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbxTest2" HorizontalAlignment="Left" Margin="182,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Height="110"/>
-        <Button x:Name="btnHash" Content="Hashuj" HorizontalAlignment="Left" Margin="247,162,0,0" VerticalAlignment="Top" Height="22" Width="60" Click="btnHash_Click"/>
+        <Button x:Name="btnAnuluj" Content="Anuluj" HorizontalAlignment="Left" Margin="264,320,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="btnAnuluj_Click"/>
 
     </Grid>
 </Window>

@@ -32,7 +32,7 @@ namespace Projekt_PBD
             this.Close();
         }
 
-        public String ByteArrayToHexString(byte[] ba)
+        public static String ByteArrayToHexString(byte[] ba)
         {
             StringBuilder hex = new StringBuilder(ba.Length * 2);
             foreach (byte b in ba)
@@ -41,7 +41,7 @@ namespace Projekt_PBD
             }
             return hex.ToString();
         }
-        public String CreateSalt(int size)
+        public static String CreateSalt(int size)
         {
             var rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
             var buff = new byte[size];
@@ -49,7 +49,7 @@ namespace Projekt_PBD
             return Convert.ToBase64String(buff);
         }
 
-        public String GenerateSHA256Hash(String input, String salt)
+        public static String GenerateSHA256Hash(String input, String salt)
         {
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input + salt);
             System.Security.Cryptography.SHA256Managed sha256hashstring = new System.Security.Cryptography.SHA256Managed();
@@ -65,6 +65,7 @@ namespace Projekt_PBD
             {
                 if (context.Logs.Where(em => em.email == tbxEmail.Text).FirstOrDefault()==null)
                 {
+                    String salt = CreateSalt(10);
                     if (rdbCzyKlient.IsChecked == true)
                     {
                         Klient klient = new Klient();
@@ -75,8 +76,9 @@ namespace Projekt_PBD
                         context.Klients.Add(klient);
                         context.SaveChanges();
                         Log log = new Log();
-                        log.haslo = pwbHaslo.Password;
+                        log.haslo = GenerateSHA256Hash(pwbHaslo.Password, salt);
                         log.email = tbxEmail.Text;
+                        log.salt = salt;
                         log.idK = context.Klients.Where(k => k.email == tbxEmail.Text).Select(i=>i.idK).First();
                         context.Logs.Add(log);
                         context.SaveChanges();
@@ -91,8 +93,9 @@ namespace Projekt_PBD
                         context.Wlasciciels.Add(wlasciciel);
                         context.SaveChanges();
                         Log log = new Log();
-                        log.haslo = pwbHaslo.Password;
+                        log.haslo = GenerateSHA256Hash(pwbHaslo.Password, salt);
                         log.email = tbxEmail.Text;
+                        log.salt = salt;
                         log.idW = context.Wlasciciels.Where(w => w.email == tbxEmail.Text).Select(i=>i.idW).First();
                         context.Logs.Add(log);
                         context.SaveChanges();
@@ -104,14 +107,6 @@ namespace Projekt_PBD
         private void btnAnuluj_Click(object sender, RoutedEventArgs e)
         {
             Zamknij();
-        }
-
-        private void btnHash_Click(object sender, RoutedEventArgs e)
-        {
-            String salt = CreateSalt(10);
-            String hashedpassword = GenerateSHA256Hash(tbxTest1.Text, salt);
-
-            tbxTest2.Text = $"Salt: {salt}\n\nHashedpassword: {hashedpassword.ToString()}";
         }
     }
 }

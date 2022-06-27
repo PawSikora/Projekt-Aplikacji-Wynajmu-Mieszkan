@@ -51,11 +51,8 @@ namespace Projekt_PBD
         {
             lbxTransakcje.Items.Clear();
             var mieszkanieKlienta = context.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
-            
             var transakcje = context.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
 
-            //MessageBox.Show(klient.idK.ToString());
-           //MessageBox.Show(transakcje.idK.ToString());
             if (transakcje != null)
             {
                 var bilans = context.Bilans.Where(b => b.idM == transakcje.idM).Where(bk => bk.dataTransakcji >= mieszkanieKlienta.poczatekWynajmu).ToList();
@@ -89,8 +86,9 @@ namespace Projekt_PBD
             DateTime dataWynajmu = ((DateTime)mieszkanieKlienta.poczatekWynajmu).Date;
             DateTime tmpData = dataWynajmu;
 
-            //while (dataWynajmu <= DateTime.Today)
-            while (dataWynajmu <=  new DateTime(2022, 8, 26))
+
+            //while (dataWynajmu < new DateTime(2022, 9, 25))
+            while (dataWynajmu <= DateTime.Today)
             {
                 dataWynajmu = dataWynajmu.AddMonths(1);
 

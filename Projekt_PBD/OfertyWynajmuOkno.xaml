@@ -5,24 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_PBD"
         mc:Ignorable="d"
-        Title="OfertyWynajmuOkno" Height="370" Width="765">
-    <Grid>
-        <ListBox x:Name="lbxOfertyWynajmu" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="252,32,308,101" SelectionChanged="lbxOfertyWynajmu_SelectionChanged"/>
+        Title="OfertyWynajmuOkno" Height="349" Width="744">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="765" Height="355">
+        <ListBox x:Name="lbxOfertyWynajmu" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="237,32,318,101" SelectionChanged="lbxOfertyWynajmu_SelectionChanged" Height="221" Width="210" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Button x:Name="btnZakoncz" Content="Zamknij" HorizontalAlignment="Left" Margin="630,279,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnZakoncz_Click"/>
-        <TextBox x:Name="tbxMiasto" HorizontalAlignment="Left" Margin="22,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbxMiasto" HorizontalAlignment="Left" Margin="22,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbxMiasto_TextChanged"/>
         <Label Content="Miasto" HorizontalAlignment="Left" Margin="22,41,0,0" VerticalAlignment="Top"/>
         <Label Content="Opcje filtrowania:" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" FontSize="16" Width="155"/>
-        <TextBox x:Name="tbxUlica" HorizontalAlignment="Left" Margin="22,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbxUlica" HorizontalAlignment="Left" Margin="22,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbxUlica_TextChanged"/>
         <Label Content="Ulica" HorizontalAlignment="Left" Margin="22,102,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbxCenaMinimalna" HorizontalAlignment="Left" Margin="20,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="16"/>
+        <TextBox x:Name="tbxCenaMinimalna" HorizontalAlignment="Left" Margin="20,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="16" TextChanged="tbxCenaMinimalna_TextChanged"/>
         <Label Content="Cena minimalna" HorizontalAlignment="Left" Margin="22,163,0,0" VerticalAlignment="Top" Height="26" Width="95"/>
-        <TextBox x:Name="tbxCenaMaksymalna" HorizontalAlignment="Left" Margin="128,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Height="16"/>
+        <TextBox x:Name="tbxCenaMaksymalna" HorizontalAlignment="Left" Margin="128,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Height="16" TextChanged="tbxCenaMaksymalna_TextChanged"/>
         <Label Content="Cena maksymalna" HorizontalAlignment="Left" Margin="122,163,0,0" VerticalAlignment="Top" Height="26" Width="110"/>
-        <RadioButton x:Name="rdbMalejaco" Content="Sortuj malejąco" HorizontalAlignment="Left" Margin="23,234,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rdbMalejaco" Content="Sortuj malejąco" HorizontalAlignment="Left" Margin="23,234,0,0" VerticalAlignment="Top" Checked="rdbMalejaco_Checked"/>
         <Label Content="Cena minimalna" HorizontalAlignment="Left" Margin="22,163,0,0" VerticalAlignment="Top" Height="26" Width="95"/>
-        <RadioButton x:Name="rdbRosnaco" Content="Sortuj rosnąco" HorizontalAlignment="Left" Margin="134,234,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnFiltruj" Content="Filtruj" HorizontalAlignment="Left" Margin="22,274,0,0" VerticalAlignment="Top" Height="20" Width="90" Click="btnFiltruj_Click"/>
-        <Button x:Name="btnResetuj" Content="Reset filtrów" HorizontalAlignment="Left" Margin="128,274,0,0" VerticalAlignment="Top" Height="20" Width="95" Click="btnResetuj_Click"/>
+        <RadioButton x:Name="rdbRosnaco" Content="Sortuj rosnąco" HorizontalAlignment="Left" Margin="134,234,0,0" VerticalAlignment="Top" Checked="rdbRosnaco_Checked"/>
+        <Button x:Name="btnResetuj" Content="Reset filtrów" HorizontalAlignment="Left" Margin="73,274,0,0" VerticalAlignment="Top" Height="20" Width="95" Click="btnResetuj_Click"/>
         <TextBox x:Name="tbxDaneMieszkania" HorizontalAlignment="Left" Margin="472,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" Height="221" IsReadOnly="True"/>
         <Label Content="Szczegółowe dane mieszkania:" HorizontalAlignment="Left" Margin="472,6,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnPowiadom" Content="Powiadom właściciela" HorizontalAlignment="Left" Margin="484,279,0,0" VerticalAlignment="Top" Width="130" Height="20" Click="btnPowiadom_Click"/>

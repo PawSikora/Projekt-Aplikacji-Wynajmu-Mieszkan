@@ -30,6 +30,7 @@ namespace Projekt_PBD
             InitializeComponent();
             lblData.Content += $" {DateTime.Today:d}";
             btnWynajmij.IsEnabled = false;
+            chkNieokreslony.IsChecked = false;
         }
 
         public PowiadomieniaOkno(Wlasciciel wlasciciel, DaneMieszkania mieszkanie) : this()
@@ -84,13 +85,17 @@ namespace Projekt_PBD
             Zainteresowani z = context.Zainteresowanis.Where(za => za.idZ == zainteresowany.idZ).FirstOrDefault();
             if (mieszkanie != null)
             {
-                if (clrWynajemOd.SelectedDate != null && clrWynajemDo.SelectedDate != null)
-                {
+                if (clrWynajemOd.SelectedDate != null)
+                { 
                     mieszkanie.idK = zainteresowany.idK;
                     //mieszkanie.poczatekWynajmu = DateTime.Today;
-                    mieszkanie.poczatekWynajmu = clrWynajemOd.SelectedDate;
+                    mieszkanie.poczatekWynajmu = clrWynajemOd.SelectedDate.Value.Date;
                     //mieszkanie.koniecWynajmu = DateTime.Today.AddMonths(Convert.ToInt32(cbxOkresWynajmu.SelectedValue));
-                    mieszkanie.koniecWynajmu = clrWynajemDo.SelectedDate;
+                    //mieszkanie.koniecWynajmu = clrWynajemDo.SelectedDate;
+                    if(chkNieokreslony.IsChecked == false) 
+                        mieszkanie.koniecWynajmu = clrWynajemOd.SelectedDate.Value.Date.AddMonths(Convert.ToInt32(cbxOkresWynajmu.SelectedValue));
+                    else if(chkNieokreslony.IsChecked == true)
+                        mieszkanie.koniecWynajmu = null;
                     mieszkanie.doWynajecia = false;
                     of.aktualne = false;
                     MessageBox.Show($"{mieszkanie.poczatekWynajmu} - {mieszkanie.koniecWynajmu}");
@@ -108,25 +113,18 @@ namespace Projekt_PBD
             }
         }
 
-        private void btnTest_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show($"{clrWynajemOd.SelectedDate:d}-{clrWynajemDo.SelectedDate:d}");
-            if (clrWynajemOd.SelectedDate == null)
-                MessageBox.Show("Lewy null");
-            if (clrWynajemDo.SelectedDate == null)
-                MessageBox.Show("Prawy null");
-        }
-
         private void chkNieokreslony_Checked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Checked");
-            clrWynajemDo.IsEnabled = false;
+            lblMiesiace.IsEnabled = false;
+            cbxOkresWynajmu.IsEnabled = false;
+            lblOkres.IsEnabled = false;
         }
 
         private void chkNieokreslony_Unchecked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Unchecked");
-            clrWynajemDo.IsEnabled = true;
+            lblMiesiace.IsEnabled = true;
+            cbxOkresWynajmu.IsEnabled = true;
+            lblOkres.IsEnabled = true;
         }
     }
 }

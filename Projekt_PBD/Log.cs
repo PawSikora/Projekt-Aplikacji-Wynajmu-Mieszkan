@@ -20,6 +20,7 @@ namespace Projekt_PBD
         public Nullable<int> idK { get; set; }
         public Nullable<int> idW { get; set; }
         public Nullable<int> idA { get; set; }
+        public string salt { get; set; }
     
         public virtual Administrator Administrator { get; set; }
         public virtual Klient Klient { get; set; }

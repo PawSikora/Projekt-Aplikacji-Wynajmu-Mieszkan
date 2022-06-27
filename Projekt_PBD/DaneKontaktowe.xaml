@@ -7,11 +7,10 @@
         mc:Ignorable="d"
         Title="DaneKontaktowe" Height="270" Width="394">
     <Grid>
-        <TextBox x:Name="tbxDane" HorizontalAlignment="Left" Margin="10,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="343" Height="143"/>
-        <Button x:Name="btnOk" Content="Ok" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnOk_Click"/>
-        <Button x:Name="btnAnuluj" Content="Anuluj" HorizontalAlignment="Left" Margin="273,202,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnAnuluj_Click"/>
-        <Label Content="Podaj dane kontaktowe i dodatkowe informacje dla właściciela:" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnTest" Content="Test" HorizontalAlignment="Center" Margin="0,207,0,0" VerticalAlignment="Top" Width="50" Click="btnTest_Click"/>
+        <TextBox x:Name="tbxDane" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="343" Height="143"/>
+        <Button x:Name="btnOk" Content="Wyślij" HorizontalAlignment="Left" Margin="26,202,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnOk_Click"/>
+        <Button x:Name="btnAnuluj" Content="Anuluj" HorizontalAlignment="Left" Margin="289,202,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnAnuluj_Click"/>
+        <Label Content="Podaj dane kontaktowe i dodatkowe informacje dla właściciela:" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
