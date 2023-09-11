@@ -35,6 +35,7 @@ namespace Projekt_PBD
         public static String ByteArrayToHexString(byte[] ba)
         {
             StringBuilder hex = new StringBuilder(ba.Length * 2);
+
             foreach (byte b in ba)
             {
                 hex.AppendFormat("{0:x2}", b);
@@ -45,7 +46,9 @@ namespace Projekt_PBD
         {
             var rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
             var buff = new byte[size];
+
             rng.GetBytes(buff);
+
             return Convert.ToBase64String(buff);
         }
 
@@ -66,37 +69,53 @@ namespace Projekt_PBD
                 if (context.Logs.Where(em => em.email == tbxEmail.Text).FirstOrDefault()==null)
                 {
                     String salt = CreateSalt(10);
+
                     if (rdbCzyKlient.IsChecked == true)
                     {
-                        Klient klient = new Klient();
-                        klient.email=   tbxEmail.Text;
-                        klient.imie = tbxImie.Text;
-                        klient.nazwisko = tbxNazwisko.Text;
-                        klient.nrKonta = Convert.ToInt32(tbxNrKonta.Text);
+                        Klient klient = new Klient()
+                        {
+                            email = tbxEmail.Text,
+                            imie = tbxImie.Text,
+                            nazwisko = tbxNazwisko.Text,
+                            nrKonta = Convert.ToInt32(tbxNrKonta.Text)
+                        };
+
                         context.Klients.Add(klient);
                         context.SaveChanges();
-                        Log log = new Log();
-                        log.haslo = GenerateSHA256Hash(pwbHaslo.Password, salt);
-                        log.email = tbxEmail.Text;
-                        log.salt = salt;
-                        log.idK = context.Klients.Where(k => k.email == tbxEmail.Text).Select(i=>i.idK).First();
+
+                        Log log = new Log()
+                        {
+                            haslo = GenerateSHA256Hash(pwbHaslo.Password, salt),
+                            email = tbxEmail.Text,
+                            salt = salt,
+                            idK = context.Klients.Where(k => k.email == tbxEmail.Text).Select(i => i.idK).First()
+                        };
+
                         context.Logs.Add(log);
                         context.SaveChanges();
-                    }                    
+                    }
+                    
                     if (rdbCzyWlasciciel.IsChecked == true)
                     {
-                        Wlasciciel wlasciciel = new Wlasciciel();
-                        wlasciciel.email=   tbxEmail.Text;
-                        wlasciciel.imie = tbxImie.Text;
-                        wlasciciel.nazwisko = tbxNazwisko.Text;
-                        wlasciciel.nrKonta = Convert.ToInt32(tbxNrKonta.Text);
+                        Wlasciciel wlasciciel = new Wlasciciel()
+                        {
+                            email = tbxEmail.Text,
+                            imie = tbxImie.Text,
+                            nazwisko = tbxNazwisko.Text,
+                            nrKonta = Convert.ToInt32(tbxNrKonta.Text)
+                        };
+
                         context.Wlasciciels.Add(wlasciciel);
                         context.SaveChanges();
-                        Log log = new Log();
-                        log.haslo = GenerateSHA256Hash(pwbHaslo.Password, salt);
-                        log.email = tbxEmail.Text;
-                        log.salt = salt;
-                        log.idW = context.Wlasciciels.Where(w => w.email == tbxEmail.Text).Select(i=>i.idW).First();
+
+                        Log log = new Log()
+                        {
+                            haslo = GenerateSHA256Hash(pwbHaslo.Password, salt),
+                            email = tbxEmail.Text,
+                            salt = salt,
+                            idW = context.Wlasciciels.Where(w => w.email == tbxEmail.Text).Select(i => i.idW).First()
+                        };
+
                         context.Logs.Add(log);
                         context.SaveChanges();
                     }

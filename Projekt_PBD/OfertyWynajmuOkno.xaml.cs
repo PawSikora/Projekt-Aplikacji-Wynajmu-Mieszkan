@@ -20,21 +20,26 @@ namespace Projekt_PBD
     /// </summary>
     public partial class OfertyWynajmuOkno : Window
     {
-        private Klient klient;
         private Baza_wynajmuEntities context = new Baza_wynajmuEntities();
+        private Klient klient;
         private List<Oferta> oferty;
         public OfertyWynajmuOkno()
         {
             InitializeComponent();
+
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+
             WyświetlOferty();
+
             btnPowiadom.IsEnabled = false;
         }
 
         void WyświetlOferty()
         {
             lbxOfertyWynajmu.Items.Clear();
+
             foreach (var o in oferty)
             {
                 if(o.aktualne == true)
@@ -66,7 +71,9 @@ namespace Projekt_PBD
         private void btnResetuj_Click(object sender, RoutedEventArgs e)
         {
             oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+
             WyświetlOferty();
+
             tbxDaneMieszkania.Clear();
             tbxMiasto.Clear();
             tbxUlica.Clear();
@@ -77,6 +84,7 @@ namespace Projekt_PBD
         private void btnPowiadom_Click(object sender, RoutedEventArgs e)
         {
             Oferta oferta = (Oferta)lbxOfertyWynajmu.SelectedItem;
+
             if (oferta != null)
             {
                 DaneKontaktowe dane = new DaneKontaktowe(oferta, klient);
@@ -89,7 +97,9 @@ namespace Projekt_PBD
         private void Filtruj()
         {
             if (tbxMiasto.Text.Length > 0) oferty = context.Ofertas.Where(m => m.DaneMieszkania.Miasto.StartsWith(tbxMiasto.Text)).ToList();
+
             if (tbxUlica.Text.Length > 0) oferty = oferty.Where(u => u.DaneMieszkania.Ulica.StartsWith(tbxUlica.Text)).ToList();
+
             if (tbxCenaMinimalna.Text.Length > 0)
             {
                 var cenaMinimalna = Convert.ToDecimal(tbxCenaMinimalna.Text);
@@ -102,14 +112,18 @@ namespace Projekt_PBD
             }
 
             if (rdbMalejaco.IsChecked == true) oferty = oferty.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+
             if (rdbRosnaco.IsChecked == true) oferty = oferty.OrderBy(c => c.cenaZaMiesiac).ToList();
+
             WyświetlOferty();
         }
 
         private void Reset()
         {
             oferty = context.Ofertas.OrderByDescending(c => c.cenaZaMiesiac).ToList();
+
             WyświetlOferty();
+
             tbxDaneMieszkania.Clear();
             tbxMiasto.Clear();
             tbxUlica.Clear();

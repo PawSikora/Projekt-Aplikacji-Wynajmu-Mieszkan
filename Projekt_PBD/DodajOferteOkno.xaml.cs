@@ -42,14 +42,17 @@ namespace Projekt_PBD
             {
                 if (context.Ofertas.Where(i => i.idM == mieszkanie.idM).Where(o => o.DaneMieszkania.koniecWynajmu != null).FirstOrDefault()==null)
                 {
-                    Oferta oferta = new Oferta();
-                    oferta.idM = mieszkanie.idM;
-                    oferta.aktualne = true;
-                    oferta.cenaZaMiesiac = Convert.ToDecimal(tbxCenaZaMiesiac.Text);
-                    oferta.opis = tbxOpis.Text;
-                    oferta.wyposazenie = tbxWyposazenie.Text;
-                    oferta.dataWystawienia = DateTime.Now;
-                    oferta.metraz = Convert.ToDouble(tbxMetraz.Text);
+                    Oferta oferta = new Oferta()
+                    {
+                        idM = mieszkanie.idM,
+                        aktualne = true,
+                        cenaZaMiesiac = Convert.ToDecimal(tbxCenaZaMiesiac.Text),
+                        opis = tbxOpis.Text,
+                        wyposazenie = tbxWyposazenie.Text,
+                        dataWystawienia = DateTime.Now,
+                        metraz = Convert.ToDouble(tbxMetraz.Text)
+                    };
+
                     context.Ofertas.Add(oferta);
                     context.SaveChanges();
                     new WlascicielOkno(wlasciciel).Show();

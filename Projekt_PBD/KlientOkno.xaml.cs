@@ -25,15 +25,21 @@ namespace Projekt_PBD
         public KlientOkno(Klient klient)
         {
             InitializeComponent();
-            this.klient = klient;
+
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
+            this.klient = klient;
+
             tbxImie.Text = klient.imie;
             tbxNazwisko.Text = klient.nazwisko;
+
             var mieszkanieKlienta = klient.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
+
             if(mieszkanieKlienta != null)
             { 
                 tbxDaneMieszkania.AppendText($"ul. {mieszkanieKlienta.Ulica} {mieszkanieKlienta.nrBudynku}/{mieszkanieKlienta.nrMieszkania}\n");
                 tbxDaneMieszkania.AppendText($"{mieszkanieKlienta.kodPocztowy} {mieszkanieKlienta.Miasto}");
+
                 btnHistoriaWpłat.IsEnabled = true;
             }
 
@@ -60,13 +66,16 @@ namespace Projekt_PBD
         {
             MessageBoxResult m = MessageBox.Show("Czy na pewno chcesz wypowiedzieć umowę?",
                 "Wypowiedzenie umowy", MessageBoxButton.YesNo);
+
             if (m == MessageBoxResult.Yes)
             {
                 var mieszkanieDoWypowiedzenia = context.DaneMieszkanias
                     .Where(mdw => mdw.idK == klient.idK).FirstOrDefault();
+
                 if (mieszkanieDoWypowiedzenia != null)
                 {
                     mieszkanieDoWypowiedzenia.koniecWynajmu = DateTime.Today.AddMonths(1);
+
                     context.SaveChanges();
                     MessageBox.Show("WYPOWIEDZIANO UMOWĘ!");
                 }

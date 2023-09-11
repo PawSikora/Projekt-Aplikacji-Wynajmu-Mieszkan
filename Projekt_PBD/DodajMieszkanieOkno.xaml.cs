@@ -37,12 +37,14 @@ namespace Projekt_PBD
             
             if (tbxAdres.Text.Length > 0 && tbxKodPocztowy.Text.Length > 0 && tbxMiasto.Text.Length > 0 && tbxNumerMIeszkania.Text.Length>0)
             {
-                string[] tab = tbxAdres.Text.Split(' '); // 0 to Adres 1 to numer domu
+                string[] tab = tbxAdres.Text.Split(' ');
+
                 if (tab.Length > 1)
                 {
                     string adres = tab[0];
                     int nrBudynku = Convert.ToInt32(tab[1]);
                     int nrMieszkania = Convert.ToInt32(tbxNumerMIeszkania.Text);
+
                     if (context.DaneMieszkanias.Where(a => a.Ulica == adres)
                             .Where(nb => nb.nrBudynku == nrBudynku)
                             .Where(nm => nm.nrMieszkania == nrMieszkania).FirstOrDefault() == null)
@@ -54,11 +56,14 @@ namespace Projekt_PBD
                             Miasto = tbxMiasto.Text,
                             kodPocztowy = tbxKodPocztowy.Text,
                             nrMieszkania = nrMieszkania,
-                            idW = this.wlasciciel.idW //B I L A N S  nie jest podpiety bo nie istnieje
+                            idW = this.wlasciciel.idW
                         };
+
                         context.DaneMieszkanias.Add(mieszkanie);
+
                         mieszkanie.doRemontu = ckbDoRemontu.IsChecked;
                         mieszkanie.doWynajecia = ckbDoWynajmu.IsChecked;
+
                         context.SaveChanges();
                         new WlascicielOkno(wlasciciel).Show();
                         this.Close();
@@ -66,7 +71,6 @@ namespace Projekt_PBD
 
                 }
                 else MessageBox.Show("Podaj nr budynku po spacji w polu \"Ulica\"!");
-
             }
         }
 

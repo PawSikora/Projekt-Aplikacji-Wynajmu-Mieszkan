@@ -22,12 +22,12 @@ namespace Projekt_PBD
     /// </summary>
     public partial class MainWindow : Window
     {
+        Baza_wynajmuEntities context = new Baza_wynajmuEntities();
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
-        Baza_wynajmuEntities context = new Baza_wynajmuEntities();
 
         private void btnZaloguj_Click(object sender, RoutedEventArgs e)
         {
@@ -36,20 +36,24 @@ namespace Projekt_PBD
             {
                 if (user.idA != null)
                 {
-                    // context.Administrators.Where(a => a.idA == user.idA).First();
+                    context.Administrators.Where(a => a.idA == user.idA).First();
                     MessageBox.Show("AdminLog");
                 }
                 else if (user.idK != null)
                 {
                     var client = context.Klients.Where(k => k.idK == user.idK).First();
+
                     KlientOkno klient = new KlientOkno(client);
+
                     Close();
                     klient.ShowDialog();
                 }
                 else if (user.idW != null)
                 {
                     var owner = context.Wlasciciels.Where(w => w.idW == user.idW).First();
+
                     WlascicielOkno wlasciciel = new WlascicielOkno(owner);
+
                     Close();
                     wlasciciel.ShowDialog();
                 }
@@ -60,8 +64,9 @@ namespace Projekt_PBD
         public Log Validate(string email, string haslo)
         {
             var user = context.Logs.Where(l => l.email == email).FirstOrDefault();
+
             String hashpass = RejestracjaOkno.GenerateSHA256Hash(haslo, user.salt);
-            //return context.Logs.Where(m => m.email == email).Where(n => n.haslo == haslo).FirstOrDefault();
+
             return context.Logs.Where(h => h.haslo == hashpass).FirstOrDefault();
         }
 

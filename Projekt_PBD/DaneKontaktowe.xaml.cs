@@ -40,9 +40,11 @@ namespace Projekt_PBD
             {
                 Baza_wynajmuEntities context = new Baza_wynajmuEntities();
                 Zainteresowani zainteresowany = new Zainteresowani();
+
                 zainteresowany.idK = this.klient.idK;
                 zainteresowany.daneKontaktowe = tbxDane.Text;
                 zainteresowany.idO = this.oferta.idO;
+
                 context.Zainteresowanis.Add(zainteresowany);
                 context.SaveChanges();
                 Close();

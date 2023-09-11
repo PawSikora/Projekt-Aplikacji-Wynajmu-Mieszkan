@@ -50,6 +50,7 @@ namespace Projekt_PBD
         private void WyswietlTransakcje()
         {
             lbxTransakcje.Items.Clear();
+
             var mieszkanieKlienta = context.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
             var transakcje = context.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
 
@@ -66,6 +67,7 @@ namespace Projekt_PBD
                 tbxImieNazwisko.Text = $"{transakcje.Wlasciciel.imie} {transakcje.Wlasciciel.nazwisko}";
                 tbxEmail.Text = $"{transakcje.Wlasciciel.email}";
                 tbxNrKonta.Text = $"{transakcje.Wlasciciel.nrKonta}";
+
                 if (bilans != null)
                 {
                     foreach (var b in bilans)
@@ -87,15 +89,12 @@ namespace Projekt_PBD
             DateTime tmpData = dataWynajmu;
 
 
-            //while (dataWynajmu < new DateTime(2022, 9, 25))
             while (dataWynajmu <= DateTime.Today)
             {
                 dataWynajmu = dataWynajmu.AddMonths(1);
 
-                //if (wplaty.Where(w => ((DateTime)w.dataTransakcji).Date  <= dataWynajmu.Date).FirstOrDefault() == null)
                 if (wplaty.Where(w => w.dataTransakcji <= dataWynajmu && w.dataTransakcji > tmpData).FirstOrDefault() == null)
                 {
-
                     lbxZalegle.Items.Add($"Zaległa opłata: {oferta.cenaZaMiesiac:C} za {dataWynajmu:d}");
                     listaZaleglych.Add(new ZalegleOplaty((decimal)oferta.cenaZaMiesiac, dataWynajmu));
                 }
@@ -114,13 +113,14 @@ namespace Projekt_PBD
             {
                 var zalegle = listaZaleglych[zaleglaOplataIDX];
                 var mieszkanieKlienta = context.DaneMieszkanias.Where(m => m.idK == klient.idK).FirstOrDefault();
+
                 Bilan oplata = new Bilan();
                 oplata.dataTransakcji = DateTime.Today;
                 oplata.idM = mieszkanieKlienta.idM;
                 oplata.kategoria = $"Opłata miesięczna za {zalegle.data:d}";
-                //oplata.kwota = mieszkanieKlienta.Ofertas.Where(o => o.idM == mieszkanieKlienta.idM).FirstOrDefault().cenaZaMiesiac;
                 oplata.kwota = zalegle.kwota;
-                MessageBox.Show($"Dokonano wpłaty {oplata.kwota:C} dnia {oplata.dataTransakcji}");
+
+                MessageBox.Show($"Dokonano wpłaty {oplata.kwota:C} dnia {oplata.dataTransakcji:d}");
 
                 context.Bilans.Add(oplata);
                 context.SaveChanges();

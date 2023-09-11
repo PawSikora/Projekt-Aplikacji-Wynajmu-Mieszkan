@@ -99,7 +99,9 @@ namespace Projekt_PBD
         private void WyswietlOplaty()
         {
             lbxMieszkania.Items.Clear();
+
             Ukryj();
+
             decimal? cenaZaMiesiac = null;
             decimal? kwota = null;
             DateTime data = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), cbxMiesiac.SelectedIndex+1, 1);
@@ -126,6 +128,7 @@ namespace Projekt_PBD
 
                 var dataTransakcji = context.Bilans.Where(b => b.idM == mieszkanie.idM).Where(b => b.dataTransakcji.Value.Year == data.Year).Where(b => b.dataTransakcji.Value.Month == data.Month).Select(x => x.dataTransakcji)
                     .FirstOrDefault();
+
                 if(dataTransakcji != null) lbxMieszkania.Items.Add(dataTransakcji);
                 if(cenaZaMiesiac != null) lbxMieszkania.Items.Add("Cena za miesiąc: " + cenaZaMiesiac);
                 if(mieszkanie.kosztaRemontow != null) lbxMieszkania.Items.Add("Koszta remontu: " + mieszkanie.kosztaRemontow);
@@ -187,16 +190,19 @@ namespace Projekt_PBD
                             lblWynajem.Visibility = Visibility.Visible;
                         } 
                         break;
+
                     case 1:
                         ObliczKwartal();
                         Ukryj();
                         lblWynajem.Visibility = Visibility.Hidden;
                         break;
+
                     case 2:
                         ObliczPolRoku();
                         Ukryj();
                         lblWynajem.Visibility = Visibility.Hidden;
                         break;
+
                     case 3:
                         ObliczRok();
                         Ukryj();
@@ -214,6 +220,7 @@ namespace Projekt_PBD
                     cbxMiesiac.Visibility = Visibility.Visible;
                     cbxKwartał.Visibility = Visibility.Hidden;
                     cbxPolRoku.Visibility = Visibility.Hidden;
+
                     if (cbxMieszkania.SelectedValue != null && cbxLata.SelectedValue != null &&
                         cbxMiesiac.SelectedValue != null)
                     {
@@ -227,8 +234,10 @@ namespace Projekt_PBD
                     cbxMiesiac.Visibility = Visibility.Hidden;
                     cbxKwartał.Visibility = Visibility.Visible;
                     cbxPolRoku.Visibility = Visibility.Hidden;
+
                     ObliczKwartal();
                     Ukryj();
+
                     lblWynajem.Visibility = Visibility.Hidden;
                     break;
 
@@ -236,8 +245,10 @@ namespace Projekt_PBD
                     cbxMiesiac.Visibility = Visibility.Hidden;
                     cbxKwartał.Visibility = Visibility.Hidden;
                     cbxPolRoku.Visibility = Visibility.Visible;
+
                     ObliczPolRoku();
                     Ukryj();
+
                     lblWynajem.Visibility = Visibility.Hidden;
                     break;
 
@@ -245,8 +256,10 @@ namespace Projekt_PBD
                     cbxMiesiac.Visibility = Visibility.Hidden;
                     cbxKwartał.Visibility = Visibility.Hidden;
                     cbxPolRoku.Visibility = Visibility.Hidden;
+
                     ObliczRok();
                     Ukryj();
+
                     lblWynajem.Visibility = Visibility.Hidden;
                     break;
             }
@@ -256,30 +269,26 @@ namespace Projekt_PBD
         {
             DateTime pocz = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 1, 1);
             DateTime kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
+
             switch (cbxKwartał.SelectedIndex)
             {
                 case 0:
                     kon = pocz.AddMonths(3);
-                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
                     break;
 
                 case 1:
                     pocz = pocz.AddMonths(3);
                     kon = pocz.AddMonths(3);
-                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
                     break;
 
                 case 2:
                     pocz = pocz.AddMonths(6);
                     kon = pocz.AddMonths(3);
-                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
                     break;
 
                 case 3:
                     pocz = pocz.AddMonths(9);
-                    //kon = pocz.AddMonths(2);
                     kon = new DateTime(Convert.ToInt32(cbxLata.SelectedValue), 12, 31);
-                    MessageBox.Show($"Od {pocz.Date:d} do {kon.Date:d}");
                     break;
             }
 
